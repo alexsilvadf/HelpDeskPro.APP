@@ -1,0 +1,7 @@
+# Módulos de funcionalidades
+
+categoria/       # Exemplo de módulo de Categoria
+├── categoria.component.ts
+├── categoria.service.ts
+├── categoria.module.ts
+└── ...

@@ -1,0 +1,5 @@
+# Componentes, pipes e módulos reutilizáveis
+
+components/
+pipes/
+directives/

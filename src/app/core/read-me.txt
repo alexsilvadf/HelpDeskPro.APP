@@ -1,0 +1,5 @@
+# Serviços globais, interceptors, guards, etc.
+
+services/
+interceptors/
+guards/
