@@ -3,10 +3,11 @@ import { ListarCategoriaComponent } from "./listar-categoria/listar-categoria.co
 import { CommonModule } from "@angular/common";
 import { CategoriaRoutingModule } from "./categoria-routing.module";
 import { SharedModule } from "../../shared/shared.module";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
     declarations:[ListarCategoriaComponent],
     exports:[],
-    imports:[CommonModule, CategoriaRoutingModule, SharedModule]
+    imports:[CommonModule, CategoriaRoutingModule, SharedModule, FormsModule, ReactiveFormsModule ]
 })
 export class CategoriaModule{}

@@ -6,19 +6,39 @@
     </div>
   </div>
   <p-panel>
-    <p-autoComplete
-      [(ngModel)]="categoria"
-      [dropdown]="true"
-      [suggestions]="categoriasFiltradas"
-      (completeMethod)="filterCountry($event)"
-      placeholder="Selecione uma categoria"
-      optionLabel="nome"
-    >
-    </p-autoComplete>
+    <form [formGroup]="formGroup">
+      <div class="grid p-fluid d-flex col-12">
+        <div>
+          asdfasdf
+        </div>
+        <div class="me-3 field">  
+          <p-autoComplete
+            [(ngModel)]="categoria"
+            [dropdown]="true"
+            [suggestions]="categoriasFiltradas"
+            (completeMethod)="filterCountry($event)"         
+            placeholder="Selecione uma categoria"
+            field="nome"
+          >
+          </p-autoComplete>
+        </div>
+
+        <div>
+          <p-dropdown
+            formControlName="selectedCity"
+            [options]="status"
+            optionLabel="nome"
+            placeholder="Selecione o Status"
+          />
+        </div>
+      </div>
+    </form>
   </p-panel>
 </p-card>
 
-<ul>
-    <li *ngFor="let categoria of categorias"> {{categoria.nome}} </li>
-    {{categoriasFiltradas}}
-</ul>
+<!-- <ul>
+  <li *ngFor="let categoria of categorias">{{ categoria.nome }}</li>
+  {{
+    categoriasFiltradas
+  }}
+</ul> -->
