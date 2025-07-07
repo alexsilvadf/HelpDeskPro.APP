@@ -6,11 +6,14 @@ import { CardModule } from 'primeng/card';
 import { PanelModule } from 'primeng/panel';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DropdownModule } from 'primeng/dropdown';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [ButtonComponent, TableComponent],
-  exports: [ButtonComponent, CardModule, PanelModule, AutoCompleteModule, DropdownModule, ReactiveFormsModule ],
+  exports: [ButtonComponent, CardModule, PanelModule, AutoCompleteModule, DropdownModule, ReactiveFormsModule,
+    TableModule
+   ],
   imports: [CommonModule],
 })
 export class SharedModule {}

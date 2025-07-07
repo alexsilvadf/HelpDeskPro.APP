@@ -14,6 +14,11 @@ interface City {
   code: string;
 }
 
+interface Column {
+    field: string;
+    header: string;
+}
+
 @Component({
   selector: 'app-listar-categoria',
   templateUrl: './listar-categoria.component.html',
@@ -24,7 +29,10 @@ export class ListarCategoriaComponent implements OnInit {
   categoria: any;
   categoriasFiltradas: any[] = [];
   status: StatusEnum[] = [];
-  selectedCity: City | undefined;
+
+   products: [] = [];
+
+    cols!: Column[];
 
   formGroup!: FormGroup;
 
@@ -45,8 +53,13 @@ export class ListarCategoriaComponent implements OnInit {
     ];
 
     this.formGroup = new FormGroup({
-      selectedCity: new FormControl<City | null>(null),
+      status: new FormControl<StatusEnum | null>(null),
     });
+
+    this.cols = [
+            { field: 'nome', header: 'Nome' },
+            { field: 'status', header: 'Status' },
+        ];
   }
 
   filterCountry(event: any) {

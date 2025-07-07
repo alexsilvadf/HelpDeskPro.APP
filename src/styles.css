@@ -1,13 +1,11 @@
-
 /* ============================= */
 /* ======= CARD SECTION ====== */
 /* ============================= */
-.p-card{
-background-color: #F8F9FA;
-      width: 95vw;  
-      margin: 0 auto;
+.p-card {
+  background-color: #f8f9fa;
+  width: 95vw;
+  margin: 0 auto;
 }
-
 
 .p-card-title {
   font-weight: bold;
@@ -15,7 +13,7 @@ background-color: #F8F9FA;
   color: #333;
 }
 
-.p-card-header-container{
+.p-card-header-container {
   display: flex;
   align-items: center;
 }
@@ -24,23 +22,21 @@ background-color: #F8F9FA;
 /* ======= ICONS SECTION ====== */
 /* ============================= */
 
-.pi-bars{
-  font-size: 20px;
+.pi-bars {
+  font-size: 30px;
   margin-right: 15px;
-     color:rgb(8, 128, 134);
+  color: rgb(8, 128, 134);
 }
 
 /* ============================= */
 /* ======= TITLES SECTION ====== */
 /* ============================= */
 
-h3{
-   color: #00ADB5;
-    font-weight: bold;
+h3 {
+  color: #00adb5;
+  font-weight: bold;
 }
-
 
 /* ============================= */
 /* ======= FIELDSET SECTION ====== */
 /* ============================= */
-
