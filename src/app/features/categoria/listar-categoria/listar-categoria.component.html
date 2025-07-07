@@ -1,4 +1,24 @@
-<h1>Categorias</h1>
+<p-card class="card">
+  <div class="p-card-header">
+    <div class="p-card-header-container">
+      <i class="pi pi-bars"></i>
+      <h3>Listagem de Categorias</h3>
+    </div>
+  </div>
+  <p-panel>
+    <p-autoComplete
+      [(ngModel)]="categoria"
+      [dropdown]="true"
+      [suggestions]="categoriasFiltradas"
+      (completeMethod)="filterCountry($event)"
+      placeholder="Selecione uma categoria"
+      optionLabel="nome"
+    >
+    </p-autoComplete>
+  </p-panel>
+</p-card>
+
 <ul>
     <li *ngFor="let categoria of categorias"> {{categoria.nome}} </li>
+    {{categoriasFiltradas}}
 </ul>

@@ -1,0 +1,12 @@
+import { NgModule } from "@angular/core";
+import { ListarCategoriaComponent } from "./listar-categoria/listar-categoria.component";
+import { CommonModule } from "@angular/common";
+import { CategoriaRoutingModule } from "./categoria-routing.module";
+import { SharedModule } from "../../shared/shared.module";
+
+@NgModule({
+    declarations:[ListarCategoriaComponent],
+    exports:[],
+    imports:[CommonModule, CategoriaRoutingModule, SharedModule]
+})
+export class CategoriaModule{}
