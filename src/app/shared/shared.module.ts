@@ -8,6 +8,11 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DropdownModule } from 'primeng/dropdown';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+
+
+
 
 @NgModule({
   declarations: [ButtonComponent, TableComponent],
@@ -19,8 +24,10 @@ import { TableModule } from 'primeng/table';
     DropdownModule,
     ReactiveFormsModule,
     TableModule,
-    TableComponent
+    TableComponent,
+    FontAwesomeModule,
+    
   ],
-  imports: [CommonModule, TableModule ],
+  imports: [CommonModule, TableModule, FontAwesomeModule  ],
 })
 export class SharedModule {}

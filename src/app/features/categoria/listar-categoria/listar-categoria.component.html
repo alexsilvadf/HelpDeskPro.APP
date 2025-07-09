@@ -1,3 +1,5 @@
+<p-toast></p-toast>
+
 <p-card class="card">
   <div class="p-card-header">
     <div class="p-card-header-container">
@@ -5,6 +7,8 @@
       <h3>Listagem de Categorias</h3>
     </div>
   </div>
+
+
   <p-panel>
     <form [formGroup]="formGroup">
       <div class="form-group d-flex col-12">
@@ -39,7 +43,7 @@
     </form>
   </p-panel>
 
-<app-table [cols]="colsTable" [registros]="categorias" [totalRecords]="10" (itemSelecionado)="onItemSelecionado($event)"></app-table>
+<app-table [cols]="colsTable" [registros]="categorias" [totalRecords]="10" (itemSelecionado)="onItemSelecionado($event)" (onExcluir)="excluirRegistro($event)"></app-table>
 
 </p-card>
 

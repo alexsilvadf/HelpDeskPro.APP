@@ -21,6 +21,10 @@
 /* ============================= */
 /* ======= ICONS SECTION ====== */
 /* ============================= */
+.pointer {
+  cursor: pointer;
+}
+
 .pi-trash {
   font-size: 16px;
   color: rgb(233, 30, 30);

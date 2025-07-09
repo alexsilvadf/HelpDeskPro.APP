@@ -16,7 +16,7 @@
     <ng-template pTemplate="header" let-columns>
       <tr>       
         <th
-          *ngFor="let col of columns"
+          *ngFor="let col of columns" [style.width.px]="col.width"
           style="
             background-color: rgb(5, 170, 179);
             color: white;
@@ -27,13 +27,13 @@
           {{ col.header }}
         </th>
 
-        <th
+        <th class="text-center"
           *ngIf="isSelecionar"
           style="
             background-color: rgb(5, 170, 179);
             color: white;
-            text-align: left;
-            font-weight: bold;
+            text-align: right;
+            font-weight: bold;  
           "
         > 
         Ações         
@@ -46,10 +46,9 @@
           {{ rowData[col.field] }}
         </td>
 
-         <td *ngIf="existeExcluir">
-            <!-- <p-tableRadioButton [value]="rowData"></p-tableRadioButton> -->
-              <i class="pi pi-trash" (click)="handleExcluir(rowData)"></i>
-              <i class="pi pi-pencil" (click)="handleExcluir(rowData)"></i>
+         <td *ngIf="existeExcluir" class="text-center">
+              <fa-icon [icon]="faTrashCan" class="me-3 text-danger fs-6 pointer" (click)="handleExcluir(rowData)"></fa-icon>
+              <fa-icon [icon]="faPenToSquare" class="me-3 text-primary fs-6 pointer" (click)="handleExcluir(rowData)"></fa-icon>
         </td>
 
         

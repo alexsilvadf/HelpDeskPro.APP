@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { CategoriaService } from 'src/app/core/services/categoria.service';
 import { StatusEnum } from 'src/app/core/status.enum';
 import { Colstable } from 'src/app/shared/components/table/inteface';
@@ -24,16 +25,13 @@ export class ListarCategoriaComponent implements OnInit {
   formGroup!: FormGroup;
   colsTable: Colstable[] = [];
 
-  constructor(private categoriaService: CategoriaService) {}
+  constructor(
+    private categoriaService: CategoriaService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
-    this.categoriaService.getCategorias().subscribe((resp) => {
-      if (resp) {
-        this.categorias = resp;
-      } else {
-        alert('Erro ao buscar categorias');
-      }
-    });
+    this.carregarCategorias();
 
     this.status = [
       { codigo: 0, nome: 'Ativo' },
@@ -45,6 +43,16 @@ export class ListarCategoriaComponent implements OnInit {
     });
 
     this.criarColunas();
+  }
+
+  carregarCategorias() {
+    this.categoriaService.getCategorias().subscribe((resp) => {
+      if (resp) {
+        this.categorias = resp;
+      } else {
+        alert('Erro ao buscar categorias');
+      }
+    });
   }
 
   criarColunas() {
@@ -71,5 +79,19 @@ export class ListarCategoriaComponent implements OnInit {
 
   onItemSelecionado(e: any) {
     console.log(e);
+  }
+
+  excluirRegistro(e: any) {
+    let codigo = e.codigo;
+    this.categoriaService.excluirCategoria(codigo).subscribe((resp) => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Sucesso',
+        detail: resp.mensagem,
+      });
+
+      let resposta = resp;
+      this.carregarCategorias();
+    });
   }
 }

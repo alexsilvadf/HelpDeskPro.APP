@@ -12,6 +12,9 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+
 
 @NgModule({
   declarations: [
@@ -27,9 +30,10 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     CalendarModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ToastModule 
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Colstable } from '../inteface';
+import { faPenSquare, faPenToSquare, faToggleOff, faToggleOn, faTrash, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-table',
@@ -7,16 +8,19 @@ import { Colstable } from '../inteface';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
-
 @Input() registros: any[]= [];
 @Input() cols: Colstable[] = [];
 @Input() totalRecords: number = 0;
-
 @Input() existeExcluir: boolean = true;
+@Input() isSelecionar: boolean = true;
 
 @Output() itemSelecionado: EventEmitter<any> = new EventEmitter();
+@Output() onExcluir: EventEmitter<any> = new EventEmitter();
 
-@Input() isSelecionar: boolean = true;
+faTrashCan = faTrashCan;
+faPenToSquare = faPenToSquare;
+faToggleOn = faToggleOn;
+faToggleOff = faToggleOff;
 
 
 registroSelecionado!: any;
@@ -34,7 +38,7 @@ this.registroSelecionado = null;
   }
 
   handleExcluir(e: any){
-console.log(e)
+this.onExcluir.emit(e);
   }
 
 }
