@@ -39,7 +39,7 @@
     </form>
   </p-panel>
 
-<app-table [cols]="colsTable" [registros]="categorias" [totalRecords]="10"></app-table>
+<app-table [cols]="colsTable" [registros]="categorias" [totalRecords]="10" (itemSelecionado)="onItemSelecionado($event)"></app-table>
 
 </p-card>
 

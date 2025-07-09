@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Colstable } from '../inteface';
 
 @Component({
@@ -12,8 +12,29 @@ export class TableComponent implements OnInit {
 @Input() cols: Colstable[] = [];
 @Input() totalRecords: number = 0;
 
+@Input() existeExcluir: boolean = true;
+
+@Output() itemSelecionado: EventEmitter<any> = new EventEmitter();
+
+@Input() isSelecionar: boolean = true;
+
+
+registroSelecionado!: any;
+
   ngOnInit(): void {
   
+  }
+
+  onRowSelect(e: any){
+this.itemSelecionado.emit(e.data);
+  }
+
+  onRowUnSelect(e: any){
+this.registroSelecionado = null;
+  }
+
+  handleExcluir(e: any){
+console.log(e)
   }
 
 }

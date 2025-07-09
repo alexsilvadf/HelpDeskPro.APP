@@ -21,11 +21,43 @@
 /* ============================= */
 /* ======= ICONS SECTION ====== */
 /* ============================= */
+.pi-trash {
+  font-size: 16px;
+  color: rgb(233, 30, 30);
+  font-weight: bold;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.pi-pencil {
+  font-size: 16px;
+  color: rgb(226, 123, 27);
+  font-weight: bold;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.pi-circle-off {
+  font-size: 16px;
+  color: rgb(233, 30, 30);
+  font-weight: bold;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.pi-circle-on {
+  font-size: 16px;
+  color: rgb(16, 223, 51);
+  font-weight: bold;
+  margin-right: 1rem;
+  cursor: pointer;
+}
 
 .pi-bars {
   font-size: 30px;
   margin-right: 15px;
   color: rgb(8, 128, 134);
+  margin-bottom: 5px;
 }
 
 /* ============================= */
@@ -40,3 +72,5 @@ h3 {
 /* ============================= */
 /* ======= CABEÇALHOS GRID TABELA SECTION ====== */
 /* ============================= */
+
+/* Estilo global para todos os <th> do p-table */

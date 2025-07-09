@@ -1,5 +1,8 @@
 <div class="card mt-3">
   <p-table
+  (onRowSelect)="onRowSelect($event)"
+  (onRowUnSelect)="onRowUnSelect($event)"
+  [(selection)]="registroSelecionado"
     [showCurrentPageReport]="true"
     currentPageReportTemplate="Exibindo {first} de {last} no total de {totalRecords} registros"
     [paginator]="true"
@@ -11,7 +14,7 @@
     [tableStyle]="{ 'min-width': '50rem' }"
   >
     <ng-template pTemplate="header" let-columns>
-      <tr>
+      <tr>       
         <th
           *ngFor="let col of columns"
           style="
@@ -23,13 +26,34 @@
         >
           {{ col.header }}
         </th>
+
+        <th
+          *ngIf="isSelecionar"
+          style="
+            background-color: rgb(5, 170, 179);
+            color: white;
+            text-align: left;
+            font-weight: bold;
+          "
+        > 
+        Ações         
+        </th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
-      <tr>
+      <tr>       
         <td *ngFor="let col of columns">
           {{ rowData[col.field] }}
         </td>
+
+         <td *ngIf="existeExcluir">
+            <!-- <p-tableRadioButton [value]="rowData"></p-tableRadioButton> -->
+              <i class="pi pi-trash" (click)="handleExcluir(rowData)"></i>
+              <i class="pi pi-pencil" (click)="handleExcluir(rowData)"></i>
+        </td>
+
+        
+
       </tr>
     </ng-template>
   </p-table>

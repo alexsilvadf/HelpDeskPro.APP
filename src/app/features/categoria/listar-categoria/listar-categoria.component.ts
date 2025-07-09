@@ -45,15 +45,13 @@ export class ListarCategoriaComponent implements OnInit {
     });
 
     this.criarColunas();
-
-    
   }
 
-  criarColunas(){
-     this.colsTable = [
-            { field: 'nome', header: 'Nome' },
-            { field: 'status', header: 'Status' },
-        ];
+  criarColunas() {
+    this.colsTable = [
+      { field: 'nome', header: 'Nome' },
+      { field: 'statusDescricao', header: 'Status' },
+    ];
   }
 
   filterCountry(event: any) {
@@ -69,5 +67,9 @@ export class ListarCategoriaComponent implements OnInit {
     }
 
     this.categoriasFiltradas = filtered;
+  }
+
+  onItemSelecionado(e: any) {
+    console.log(e);
   }
 }

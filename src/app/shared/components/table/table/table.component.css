@@ -1,7 +1,11 @@
-::ng-deep .p-table thead > tr > th{
-  background-color: rgb(8, 128, 134);
-  color: white;
-  text-align: center;
+
+.custom-table .p-column-header-content {
   font-weight: bold;
-  border: 1px solid red;
+  color: blue;
+}
+
+.header-cell {
+    background-color: lightgray;
+    font-weight: bold;
+    text-align: center;
 }
