@@ -2,21 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CategoriaService } from 'src/app/core/services/categoria.service';
 import { StatusEnum } from 'src/app/core/status.enum';
+import { Colstable } from 'src/app/shared/components/table/inteface';
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
   query: string;
   nome: string;
-}
-
-interface City {
-  name: string;
-  code: string;
-}
-
-interface Column {
-    field: string;
-    header: string;
 }
 
 @Component({
@@ -30,11 +21,8 @@ export class ListarCategoriaComponent implements OnInit {
   categoriasFiltradas: any[] = [];
   status: StatusEnum[] = [];
 
-   products: [] = [];
-
-    cols!: Column[];
-
   formGroup!: FormGroup;
+  colsTable: Colstable[] = [];
 
   constructor(private categoriaService: CategoriaService) {}
 
@@ -56,7 +44,13 @@ export class ListarCategoriaComponent implements OnInit {
       status: new FormControl<StatusEnum | null>(null),
     });
 
-    this.cols = [
+    this.criarColunas();
+
+    
+  }
+
+  criarColunas(){
+     this.colsTable = [
             { field: 'nome', header: 'Nome' },
             { field: 'status', header: 'Status' },
         ];

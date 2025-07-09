@@ -38,27 +38,8 @@
       </div>
     </form>
   </p-panel>
-  
 
-  <div class="card mt-3">
-    <p-table [columns]="cols" [value]="categorias" [tableStyle]="{ 'min-width': '50rem' }">
-        <ng-template pTemplate="header" let-columns>
-            <tr>
-                <th *ngFor="let col of columns" class="bg-primary text-white">
-                    {{ col.header }}
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-rowData let-columns="columns">
-            <tr>
-                <td *ngFor="let col of columns">
-                    {{ rowData[col.field]}}
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
-</div>
-
+<app-table [cols]="colsTable" [registros]="categorias" [totalRecords]="10"></app-table>
 
 </p-card>
 
