@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CategoriaRoutingModule } from './categoria-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 
 @NgModule({
@@ -18,6 +18,6 @@ import { ToastModule } from 'primeng/toast';
     ReactiveFormsModule,
     ToastModule,
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
 })
 export class CategoriaModule {}

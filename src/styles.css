@@ -21,6 +21,24 @@
 /* ============================= */
 /* ======= ICONS SECTION ====== */
 /* ============================= */
+
+.p-confirmdialog-accept {
+  color: #ffffff !important;
+  background-color: #28a745 !important; /* verde */
+  border: none !important;
+}
+
+/* Botão "Não" */
+.p-confirmdialog-reject {
+  color: #ffffff !important;
+  background-color: #dc3545 !important; /* vermelho */
+  border: none !important;
+}
+
+
+.pi-exclamation-triangle{
+  color: rgb(230, 160, 31);
+}
 .pointer {
   cursor: pointer;
 }

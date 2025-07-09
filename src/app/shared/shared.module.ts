@@ -14,6 +14,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
+
+
 @NgModule({
   declarations: [ButtonComponent, TableComponent],
   exports: [

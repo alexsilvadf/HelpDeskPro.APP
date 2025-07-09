@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { CategoriaService } from 'src/app/core/services/categoria.service';
 import { StatusEnum } from 'src/app/core/status.enum';
 import { Colstable } from 'src/app/shared/components/table/inteface';
@@ -27,7 +27,8 @@ export class ListarCategoriaComponent implements OnInit {
 
   constructor(
     private categoriaService: CategoriaService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationservice: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -82,16 +83,32 @@ export class ListarCategoriaComponent implements OnInit {
   }
 
   excluirRegistro(e: any) {
-    let codigo = e.codigo;
-    this.categoriaService.excluirCategoria(codigo).subscribe((resp) => {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Sucesso',
-        detail: resp.mensagem,
-      });
+    this.confirmationservice.confirm({
+      message: 'Deseja remover esta categoria?',
+      header: 'Atenção',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        let codigo = e.codigo;
+        this.categoriaService.excluirCategoria(codigo).subscribe((resp) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Sucesso',
+            detail: resp.mensagem,
+          });
 
-      let resposta = resp;
-      this.carregarCategorias();
+          let resposta = resp;
+          this.carregarCategorias();
+        });
+      },
+      reject: () => {
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Cancelado',
+          detail: 'Operação cancelada pelo usuário',
+        });
+      },
     });
   }
 }
