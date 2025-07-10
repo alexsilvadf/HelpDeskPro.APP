@@ -13,12 +13,6 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 
-
-
-
-
-
-
 @NgModule({
   declarations: [ButtonComponent, TableComponent],
   exports: [

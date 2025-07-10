@@ -22,3 +22,7 @@
 .w-100-toggle {
   width: 100%;
 }
+
+::ng-deep .p-dialog .p-dialog-header {
+  color: #00adb5;           /* cor do texto */
+}

@@ -61,7 +61,7 @@
       [modal]="true"
       [(visible)]="mostrarModal"
     >
-      <div class="card p-3">
+      <div class="card p-5">
         <div class="flex justify-content-center gap-2 mb-2">
           <span class="p-text-secondary block mb-6">Nome</span>
           <div class="card flex justify-content-center mt-2">
@@ -80,13 +80,20 @@
           </div>
         </div>
 
-        <div class="d-flex justify-content-between mt-3">
-          <p-button
+        <div class="flex justify-content-between mt-3">
+          <p-button class="me-3"
             label="Cancelar"
-            severity="secondary"
-            (onClick)="mostrarModal = false"
+           styleClass="p-button-warning"
+            (click)="mostrarModal = false"
+             icon="pi pi-check"
           />
-          <p-button label="Salvar" (onClick)="mostrarModal = false" />
+          <p-button        
+            label="Salvar"
+             styleClass="p-button-Primary"
+            (click)="mostrarModal = false"
+            icon="pi pi-check"
+            iconPos="right"
+          />
         </div>
       </div>
     </p-dialog>

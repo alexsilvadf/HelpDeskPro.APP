@@ -18,10 +18,17 @@ interface AutoCompleteCompleteEvent {
 })
 export class ListarCategoriaComponent implements OnInit {
   categorias: any[] = [];
-  // categoria: any;
   categoriasFiltradas: any[] = [];
   status: StatusEnum[] = [];
-  form!: FormGroup;
+
+  form = this.fb.group({
+    nome: this.fb.control<string | null>(null),
+    status: this.fb.control<StatusEnum | null>(null),
+    categoria: this.fb.control<any | null>(null),
+    checked: this.fb.control<boolean>(false),
+  });
+
+
   colsTable: Colstable[] = [];
 
   mostrarModal: boolean = true;
@@ -42,16 +49,9 @@ export class ListarCategoriaComponent implements OnInit {
       { codigo: 1, nome: 'Inativo' },
     ];
 
-    this.form = this.fb.group({
-      nome: this.fb.control<string | null>(null),
-      status: this.fb.control<StatusEnum | null>(null),
-      categoria: this.fb.control<any | null>(null),
-      checked: this.fb.control<boolean>(false)
-    });
-
     this.criarColunas();
 
-    if(this.isUpdate){
+    if (this.isUpdate) {
       // this.formGroup.controls.nome.disable;
     }
   }
@@ -122,11 +122,8 @@ export class ListarCategoriaComponent implements OnInit {
     });
   }
 
-editarCategoria(event: any){
-this.mostrarModal = true;
-}
-
-
-
-
+  editarCategoria(event: any) {
+    this.mostrarModal = true;
+    this.form.patchValue(event);
+  }
 }
