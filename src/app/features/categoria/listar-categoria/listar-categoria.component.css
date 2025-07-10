@@ -6,3 +6,19 @@
 ::ng-deep .p-confirmdialog-accept {
   color: green !important;
 }
+
+
+.centraliza-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* opcional, se quiser centralizar verticalmente também */
+}
+
+.container-toggle {
+  width: 300px; /* ou 100%, ou o tamanho que você quiser */
+}
+
+.w-100-toggle {
+  width: 100%;
+}

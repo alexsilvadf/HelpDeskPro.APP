@@ -9,6 +9,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 
 
@@ -28,8 +31,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TableModule,
     TableComponent,
     FontAwesomeModule,
+    DialogModule,
+    InputTextModule,
+    ToggleButtonModule
     
   ],
-  imports: [CommonModule, TableModule, FontAwesomeModule  ],
+  imports: [CommonModule, TableModule, FontAwesomeModule, DialogModule, InputTextModule, ToggleButtonModule  ],
 })
 export class SharedModule {}

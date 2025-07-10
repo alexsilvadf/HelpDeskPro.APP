@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CategoriaService } from 'src/app/core/services/categoria.service';
 import { StatusEnum } from 'src/app/core/status.enum';
@@ -18,17 +18,20 @@ interface AutoCompleteCompleteEvent {
 })
 export class ListarCategoriaComponent implements OnInit {
   categorias: any[] = [];
-  categoria: any;
+  // categoria: any;
   categoriasFiltradas: any[] = [];
   status: StatusEnum[] = [];
-
-  formGroup!: FormGroup;
+  form!: FormGroup;
   colsTable: Colstable[] = [];
+
+  mostrarModal: boolean = true;
+  isUpdate: boolean = false;
 
   constructor(
     private categoriaService: CategoriaService,
     private messageService: MessageService,
-    private confirmationservice: ConfirmationService
+    private confirmationservice: ConfirmationService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -39,11 +42,18 @@ export class ListarCategoriaComponent implements OnInit {
       { codigo: 1, nome: 'Inativo' },
     ];
 
-    this.formGroup = new FormGroup({
-      status: new FormControl<StatusEnum | null>(null),
+    this.form = this.fb.group({
+      nome: this.fb.control<string | null>(null),
+      status: this.fb.control<StatusEnum | null>(null),
+      categoria: this.fb.control<any | null>(null),
+      checked: this.fb.control<boolean>(false)
     });
 
     this.criarColunas();
+
+    if(this.isUpdate){
+      // this.formGroup.controls.nome.disable;
+    }
   }
 
   carregarCategorias() {
@@ -111,4 +121,12 @@ export class ListarCategoriaComponent implements OnInit {
       },
     });
   }
+
+editarCategoria(event: any){
+this.mostrarModal = true;
+}
+
+
+
+
 }

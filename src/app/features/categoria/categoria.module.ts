@@ -16,7 +16,7 @@ import { ToastModule } from 'primeng/toast';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastModule,
+    ToastModule
   ],
   providers: [MessageService, ConfirmationService],
 })
