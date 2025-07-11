@@ -156,7 +156,6 @@ export class ListarCategoriaComponent implements OnInit {
     this.categoriaService
       .adicionarCategoria(this.form.getRawValue())
       .subscribe((resp) => {
-        let resposta = resp;
 
         this.messageService.add({
           severity: 'success',
@@ -165,7 +164,12 @@ export class ListarCategoriaComponent implements OnInit {
 
         this.mostrarModal = false;
 
+         this.form.reset();
+  this.form.controls.status.setValue(-1);
         this.carregarCategorias();
+      
+
+    
       });
   }
 
