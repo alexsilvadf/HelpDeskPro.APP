@@ -27,6 +27,7 @@ export class ListarCategoriaComponent implements OnInit {
   form = this.fb.group({
     nome: this.fb.control<string | null>(null),
     status: this.fb.control<number | null>(-1),
+    statusSelecionado: this.fb.control<number | null>(-1),
     categoria: this.fb.control<any | null>(null),
     checked: this.fb.control<boolean>(false),
   });
@@ -85,6 +86,8 @@ export class ListarCategoriaComponent implements OnInit {
         filtered.push(categoria);
       }
     }
+
+   
 
     this.categoriasFiltradas = filtered;
   }
@@ -174,8 +177,10 @@ export class ListarCategoriaComponent implements OnInit {
   }
 
   categoriaSelecionada(event: any) {
+
     this.categorias = [];
     this.categorias.push(event);
+  
   }
 
   limparFiltros() {
@@ -183,6 +188,7 @@ export class ListarCategoriaComponent implements OnInit {
   }
 
   buscarCategoriaPorStatus(event: any) {
+    this.form.reset();
     this.form.controls.status.setValue(event.value.codigo);
     this.carregarCategorias();
   }

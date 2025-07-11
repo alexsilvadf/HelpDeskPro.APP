@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ListarCategoriaComponent } from './features/categoria/listar-categoria/listar-categoria.component';
 import { ManterCategoriaComponent } from './features/categoria/manter-categoria/manter-categoria.component';
 import { SharedModule } from './shared/shared.module';
@@ -15,13 +15,15 @@ import { FormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
+import { LoadingComponent } from './core/loading/loading.component';
+import { LoadingInterceptor } from './core/loading/loading.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListarCategoriaComponent,
-    ManterCategoriaComponent
+    ManterCategoriaComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,9 +35,13 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     SharedModule,
     FormsModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
   ],
-  providers: [MessageService, ConfirmationService],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    MessageService,
+    ConfirmationService,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
