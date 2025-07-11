@@ -12,6 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [ButtonComponent, TableComponent],
@@ -27,9 +28,12 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     FontAwesomeModule,
     DialogModule,
     InputTextModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    RadioButtonModule
     
   ],
-  imports: [CommonModule, TableModule, FontAwesomeModule, DialogModule, InputTextModule, ToggleButtonModule  ],
+  imports: [CommonModule, TableModule, FontAwesomeModule, DialogModule, InputTextModule, ToggleButtonModule,
+    RadioButtonModule
+    ],
 })
 export class SharedModule {}

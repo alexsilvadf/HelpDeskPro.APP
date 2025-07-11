@@ -26,3 +26,11 @@
 ::ng-deep .p-dialog .p-dialog-header {
   color: #00adb5;           /* cor do texto */
 }
+
+.ml-radio {
+  margin-left: 8px;
+}
+
+
+
+

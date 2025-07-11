@@ -21,7 +21,9 @@
             formControlName="categoria"
             [dropdown]="true"
             [suggestions]="categoriasFiltradas"
-            (completeMethod)="filterCountry($event)"
+            (completeMethod)="filtrarCategorias($event)"
+            (onSelect)="categoriaSelecionada($event)"
+            (onClear)="limparFiltros()"
             placeholder="Selecione uma categoria"
             field="nome"
           >
@@ -37,11 +39,20 @@
             [options]="status"
             optionLabel="nome"
             placeholder="Selecione o Status"
+            (onChange)="buscarCategoriaPorStatus($event)"
           />
         </div>
       </div>
     </form>
   </p-panel>
+
+  <div class="d-flex col-12 justify-content-end m-3 ms-0">
+    <fa-icon
+      [icon]="faPlus"
+      class="me-3 text-primary fs-2 pointer"
+      (click)="adicionarCatgoria()"
+    ></fa-icon>
+  </div>
 
   <app-table
     [cols]="colsTable"
@@ -57,7 +68,7 @@
 <form [formGroup]="form">
   <div class="card flex justify-content-center">
     <p-dialog
-      header="Editar Categoria"
+      header="{{ tituloModal }}"
       [modal]="true"
       [(visible)]="mostrarModal"
     >
@@ -69,28 +80,42 @@
           </div>
         </div>
 
-        <div class="flex justify-content-center gap-2 mb-2">
-          <span class="p-text-secondary block mb-6">Situação</span>
-          <div class="flex justify-content-center mt-2">
-            <p-toggleButton
-              formControlName="status"
-              onLabel="Ativo"
-              offLabel="Inativo"
-            />
+      
+          <div class="d-flex justify-content-between mt-3">
+            <div class="flex align-items-center">
+              <p-radioButton
+                name="status"
+                [value]= '0'
+                formControlName="status"
+                inputId="ativo"
+              />
+              <label for="ativo" class="ml-radio"> Ativo </label>
+            </div>
+
+            <div class="flex align-items-center">
+              <p-radioButton
+                name="status"
+                [value]= '1'
+                formControlName="status"
+                inputId="inativo"
+              />
+              <label for="inativo" class="ml-radio"> Inativo </label>
+            </div>
           </div>
-        </div>
+      
 
         <div class="flex justify-content-between mt-3">
-          <p-button class="me-3"
+          <p-button
+            class="me-3"
             label="Cancelar"
-           styleClass="p-button-warning"
+            styleClass="p-button-warning"
             (click)="mostrarModal = false"
-             icon="pi pi-check"
+            icon="pi pi-check"
           />
-          <p-button        
+          <p-button
             label="Salvar"
-             styleClass="p-button-Primary"
-            (click)="mostrarModal = false"
+            styleClass="p-button-Primary"
+            (click)="handleAdd()"
             icon="pi pi-check"
             iconPos="right"
           />

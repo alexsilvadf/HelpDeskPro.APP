@@ -12,14 +12,25 @@ export class CategoriaService {
 
   constructor(private http: HttpClient) { }
 
-  getCategorias(): Observable<any>{
-    return this.http.get(`${this.baseUrl}/categoria`);
+  getCategorias(status?: number): Observable<any>{
+    let params: any = {};
+ 
+    if(status !== undefined && status !== null){
+      params.status = status;
+    }
+    return this.http.get(`${this.baseUrl}/categoria`, {params});
   }
+
+   getCategoria(codigo: number): Observable<any>{
+    return this.http.get(`${this.baseUrl}/categoria/${codigo}`);
+  }
+
 
   excluirCategoria(codigo: number){
     return this.http.delete<{mensagem: string}>(`${this.baseUrl}/categoria/${codigo}`);
   }
-  //   adicionarCategoria(categoria: any): Observable<any> {
-  //   return this.http.post(`${this.baseUrl}/api/categorias`, categoria);
-  // }
+
+    adicionarCategoria(categoria: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/categoria`, categoria);
+  }
 }
