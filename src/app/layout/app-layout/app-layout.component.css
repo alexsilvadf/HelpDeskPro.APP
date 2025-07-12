@@ -2,3 +2,21 @@
   font-weight: bold;
   text-decoration: underline;
 }
+
+.corBorda{
+    color: #00adb5;
+}
+
+a{
+  text-decoration: none;
+}
+
+.corLinks{
+  color:  #2bcfd8ff;
+  transition: color 0.2s;
+  font-size: 20px;
+}
+
+.corLinks:hover {
+  color: #00adb5; /* azul ao passar o mouse */
+}
