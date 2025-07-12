@@ -17,6 +17,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { LoadingComponent } from './core/loading/loading.component';
 import { LoadingInterceptor } from './core/loading/loading.interceptor';
+import { AppLayoutComponent } from './layout/app-layout/app-layout.component';
+import { AppMenuComponent } from './layout/app-menu/app-menu.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { LoadingInterceptor } from './core/loading/loading.interceptor';
     ListarCategoriaComponent,
     ManterCategoriaComponent,
     LoadingComponent,
+    AppLayoutComponent,
+    AppMenuComponent,
   ],
   imports: [
     BrowserModule,

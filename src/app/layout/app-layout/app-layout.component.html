@@ -1,0 +1,20 @@
+<div class="d-flex" style="min-height: 100vh;">
+  <!-- Sidebar -->
+  <div class="bg-dark text-white p-3" style="width: 220px;">
+    <h4>Menu</h4>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/categoria" routerLinkActive="active">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/produtos" routerLinkActive="active">Produtos</a>
+      </li>
+    </ul>
+    
+  </div>
+
+  <!-- Conteúdo principal -->
+  <div class="flex-grow-1 p-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>
