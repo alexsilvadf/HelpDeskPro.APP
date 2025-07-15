@@ -1,4 +1,4 @@
-.nav-link.active {
+/* .nav-link.active {
   font-weight: bold;
   text-decoration: underline;
 }
@@ -18,5 +18,27 @@ a{
 }
 
 .corLinks:hover {
-  color: #00adb5; /* azul ao passar o mouse */
+  color: #00adb5; 
+} */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.corLinks {
+  color: #0abdc7;
+}
+.corLinks.active {
+  font-weight: bold;
+}
+.corBorda {
+  color: #0abdc7;
+}
+
+.corLinks {
+  color: #0abdc7;
+}
+.corLinks.active {
+  font-weight: bold;
 }

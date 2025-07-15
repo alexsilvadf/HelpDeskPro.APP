@@ -1,28 +1,120 @@
-<div
-  class="d-flex"
-  style="
-    min-height: 100%;
-    width: 100%;
-    overflow-x: hidden
-   ;
-  "
->
-  <!-- Sidebar -->
-  <div
-    class="bg-transparent p-3 ms-2 rounded p-3"
-    style="width: 280px; border: 4px solid #0abdc7;"
+<div class="d-flex flex-column" style="height: 100vh">
+  <!-- Cabeçalho -->
+  <header
+    class="bg-primary text-white p-2 d-flex justify-content-between align-items-center"
   >
-    <div class="d-flex mt-4 border-bottom border-1 justify-content-between">
-      <h3 class="me-3">HDP</h3>
-       <fa-icon [icon]="faHeadphones" size="2x" class="corBorda"></fa-icon>
+    <div
+      class="d-flex border-bottom justify-content-between align-items-center mb-3"
+    >
+      <h3
+        class="me-3 text-white"
+      >
+        HDP
+      </h3>
+      <fa-icon
+        [icon]="faHeadphones"
+        size="lg"
+        class="text-white fs-5 mb-1"
+      ></fa-icon>
+
+      
+
     </div>
 
-    <ul class="nav flex-column mt-2">
+     <div>
+      Sistema de Gerenciamento de Chamados V 1.0
+    </div>
+
+   
+
+    <!-- Botão menu hambúrguer (visível apenas em telas pequenas) -->
+    <button
+      class="btn btn-outline-light d-lg-none"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#mobileSidebar"
+      aria-controls="mobileSidebar"
+    >
+   <fa-icon [icon]="fabars"></fa-icon>
+    </button>
+  </header>
+
+  <div class="d-flex flex-grow-1" style="overflow: hidden">
+    <!-- Sidebar fixa (visível apenas em telas grandes) -->
+    <div
+      class="bg-light p-3 d-none d-lg-block"
+      style="width: 280px; border-right: 2px solid #0abdc7"
+    >   
+
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a
+            class="nav-link corLinks text-decoration-none"
+            routerLink="/"
+            routerLinkActive="active"
+            >DashBoard</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link corLinks text-decoration-none"
+            routerLink="/"
+            routerLinkActive="active"
+            >Abrir Chamado</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link corLinks text-decoration-none"
+            routerLink="/categoria"
+            routerLinkActive="active"
+            >Categorias</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link corLinks text-decoration-none"
+            routerLink="/manterCategoria"
+            routerLinkActive="active"
+            >Departamentos</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="flex-grow-1 d-flex flex-column" style="overflow: auto">
+      <div class="flex-grow-1 p-3">
+        <router-outlet></router-outlet>
+      </div>    
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar Offcanvas (mobile) -->
+<div
+  class="offcanvas offcanvas-start d-lg-none"
+  tabindex="-1"
+  id="mobileSidebar"
+  aria-labelledby="mobileSidebarLabel"
+>
+  <div class="offcanvas-header">
+    <h5 id="mobileSidebarLabel">Menu</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="offcanvas"
+      aria-label="Fechar"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="nav flex-column">
       <li class="nav-item">
         <a
           class="nav-link corLinks text-decoration-none"
           routerLink="/categoria"
           routerLinkActive="active"
+          data-bs-dismiss="offcanvas"
           >Categorias</a
         >
       </li>
@@ -31,14 +123,10 @@
           class="nav-link corLinks text-decoration-none"
           routerLink="/manterCategoria"
           routerLinkActive="active"
+          data-bs-dismiss="offcanvas"
           >Manter</a
         >
       </li>
     </ul>
-  </div>
-
-  <!-- Conteúdo principal -->
-  <div class="ps-2 flex-grow-1">
-    <router-outlet></router-outlet>
   </div>
 </div>

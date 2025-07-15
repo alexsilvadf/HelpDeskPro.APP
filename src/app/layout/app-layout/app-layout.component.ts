@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faHeadphones } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faHeadphones } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-app-layout',
@@ -7,7 +7,8 @@ import { faHeadphones } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./app-layout.component.css']
 })
 export class AppLayoutComponent implements OnInit {
- faHeadphones = faHeadphones
+ faHeadphones = faHeadphones;
+ fabars = faBars;
 
   ngOnInit(): void {
     throw new Error('Method not implemented.');
