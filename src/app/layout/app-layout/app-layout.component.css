@@ -29,6 +29,13 @@ html, body {
 .corLinks {
   color: #0abdc7;
 }
+
+.corLinks:hover {
+  color: #2d888dff;
+  background-color: #ccc;
+    font-weight: bold;
+}
+
 .corLinks.active {
   font-weight: bold;
 }
@@ -36,9 +43,16 @@ html, body {
   color: #0abdc7;
 }
 
-.corLinks {
-  color: #0abdc7;
+
+.userFoto{
+  height: 50px;
+  width: 50px;
+border-radius: 50%;
+background-color:  #a3cdcf3b;
 }
-.corLinks.active {
-  font-weight: bold;
+
+img{
+   height: 50px;
+  width: 50px;
+  border-radius: 50%;
 }

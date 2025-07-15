@@ -6,26 +6,15 @@
     <div
       class="d-flex border-bottom justify-content-between align-items-center mb-3"
     >
-      <h3
-        class="me-3 text-white"
-      >
-        HDP
-      </h3>
+      <h3 class="me-3 text-white">HDP</h3>
       <fa-icon
         [icon]="faHeadphones"
         size="lg"
         class="text-white fs-5 mb-1"
       ></fa-icon>
-
-      
-
     </div>
 
-     <div>
-      Sistema de Gerenciamento de Chamados V 1.0
-    </div>
-
-   
+    <div>Sistema de Gerenciamento de Chamados V 1.0</div>
 
     <!-- Botão menu hambúrguer (visível apenas em telas pequenas) -->
     <button
@@ -35,17 +24,42 @@
       data-bs-target="#mobileSidebar"
       aria-controls="mobileSidebar"
     >
-   <fa-icon [icon]="fabars"></fa-icon>
+      <fa-icon [icon]="fabars"></fa-icon>
     </button>
   </header>
 
   <div class="d-flex flex-grow-1" style="overflow: hidden">
     <!-- Sidebar fixa (visível apenas em telas grandes) -->
+
     <div
       class="bg-light p-3 d-none d-lg-block"
       style="width: 280px; border-right: 2px solid #0abdc7"
-    >   
-
+      *ngIf="showSidebar"
+    >
+      <div
+        class="border-bottom border-2 mb-4 justify-content-between align-items-center"        
+      >
+        <div class="d-flex justify-content-between">
+          <div
+            class="d-flex userFoto align-items-center justify-content-center"
+          >
+          <img src="https://sujeitoprogramador.com/steve.png" alt="">
+            <!-- <fa-icon
+              [icon]="faUserTie"
+              class="text-primary fs-3 mb-1"
+            ></fa-icon> -->
+          </div>
+          <div
+            class="d-flex userFoto align-items-center justify-content-center"
+          >
+            <fa-icon
+              [icon]="fabars"
+              class="corBorda fs-3 mb-1"  
+              (click)="toggleSidebar()"            
+            ></fa-icon>
+          </div>
+        </div>
+      </div>
       <ul class="nav flex-column">
         <li class="nav-item">
           <a
@@ -86,7 +100,7 @@
     <div class="flex-grow-1 d-flex flex-column" style="overflow: auto">
       <div class="flex-grow-1 p-3">
         <router-outlet></router-outlet>
-      </div>    
+      </div>
     </div>
   </div>
 </div>
