@@ -1,0 +1,60 @@
+<div class="card mt-3">
+  <p-table
+  (onRowSelect)="onRowSelect($event)"
+  (onRowUnSelect)="onRowUnSelect($event)"
+  [(selection)]="registroSelecionado"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Exibindo {first} de {last} no total de {totalRecords} registros"
+    [paginator]="true"
+    [rows]="10"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    [columns]="cols"
+    [value]="registros"
+    [tableStyle]="{ 'min-width': '50rem' }"
+  >
+    <ng-template pTemplate="header" let-columns>
+      <tr>       
+        <th
+          *ngFor="let col of columns" [style.width.px]="col.width"
+          style="
+            background-color: rgb(5, 170, 179);
+            color: white;
+            text-align: left;
+            font-weight: bold;
+          "
+        >
+          {{ col.header }}
+        </th>
+
+        <th class="text-center"
+          *ngIf="isSelecionar"
+          style="
+            background-color: rgb(5, 170, 179);
+            color: white;
+            text-align: right;
+            font-weight: bold;  
+          "
+        > 
+        Ações         
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>       
+        <td *ngFor="let col of columns">
+          {{ rowData[col.field] }}
+        </td>
+
+         <td *ngIf="existeExcluir" class="text-center">
+              <fa-icon [icon]="faTrashCan" class="me-3 text-danger fs-6 pointer" (click)="handleExcluir(rowData)"></fa-icon>
+              <fa-icon [icon]="faPenToSquare" class="me-3 text-primary fs-6 pointer" (click)="handleEditar(rowData)"></fa-icon>
+        </td>
+        
+       
+        
+
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,0 +1,11 @@
+
+.custom-table .p-column-header-content {
+  font-weight: bold;
+  color: blue;
+}
+
+.header-cell {
+    background-color: lightgray;
+    font-weight: bold;
+    text-align: center;
+}

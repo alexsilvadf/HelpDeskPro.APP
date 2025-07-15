@@ -1,1 +1,104 @@
-/* You can add global styles to this file, and also import other style files */
+/* ============================= */
+/* ======= CARD SECTION ====== */
+/* ============================= */
+.p-card {
+  background-color: #f8f9fa;
+  width: 95vw;
+  margin: 0 auto;
+}
+
+.p-card-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.p-card-header-container {
+  display: flex;
+  align-items: center;
+}
+
+/* ============================= */
+/* ======= ICONS SECTION ====== */
+/* ============================= */
+
+.p-confirmdialog-accept {
+  color: #ffffff !important;
+  background-color: #28a745 !important; /* verde */
+  border: none !important;
+}
+
+/* Botão "Não" */
+.p-confirmdialog-reject {
+  color: #ffffff !important;
+  background-color: #dc3545 !important; /* vermelho */
+  border: none !important;
+}
+
+
+.pi-exclamation-triangle{
+  color: rgb(230, 160, 31);
+}
+.pointer {
+  cursor: pointer;
+}
+
+.pi-trash {
+  font-size: 16px;
+  color: rgb(233, 30, 30);
+  font-weight: bold;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.pi-pencil {
+  font-size: 16px;
+  color: rgb(226, 123, 27);
+  font-weight: bold;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.pi-circle-off {
+  font-size: 16px;
+  color: rgb(233, 30, 30);
+  font-weight: bold;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.pi-circle-on {
+  font-size: 16px;
+  color: rgb(16, 223, 51);
+  font-weight: bold;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.pi-bars {
+  font-size: 30px;
+  margin-right: 15px;
+  color: rgb(8, 128, 134);
+  margin-bottom: 5px;
+}
+
+/* ============================= */
+/* ======= TITLES SECTION ====== */
+/* ============================= */
+
+h3 {
+  color: #00adb5;
+  font-weight: bold;
+}
+
+.corPadrao{
+    color: #00adb5;
+}
+
+/* ============================= */
+/* ======= CABEÇALHOS GRID TABELA SECTION ====== */
+/* ============================= */
+
+/* ============================= */
+/* ======= Buttons SECTION ====== */
+/* ============================= */
