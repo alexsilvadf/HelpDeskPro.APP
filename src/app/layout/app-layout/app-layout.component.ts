@@ -15,6 +15,8 @@ export class AppLayoutComponent implements OnInit {
   fabars = faBars;
   faUserTie = faUserTie;
 
+  widthSideBar = '280px';
+
   showSidebar: boolean = true;
 
   ngOnInit(): void {

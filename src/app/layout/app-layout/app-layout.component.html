@@ -31,9 +31,18 @@
   <div class="d-flex flex-grow-1" style="overflow: hidden">
     <!-- Sidebar fixa (visível apenas em telas grandes) -->
 
+    <div class="bg-light p-1 d-none d-lg-block" *ngIf="!showSidebar">
+       <fa-icon
+            class="btn btn-outline-light d-lg-none"
+              [icon]="fabars"
+              class="corBorda fs-3 mb-1"  
+              (click)="toggleSidebar()"            
+            ></fa-icon>
+    </div>
+
     <div
       class="bg-light p-3 d-none d-lg-block"
-      style="width: 280px; border-right: 2px solid #0abdc7"
+      style="border-right: 2px solid #0abdc7"
       *ngIf="showSidebar"
     >
       <div
@@ -43,16 +52,13 @@
           <div
             class="d-flex userFoto align-items-center justify-content-center"
           >
-          <img src="https://sujeitoprogramador.com/steve.png" alt="">
-            <!-- <fa-icon
-              [icon]="faUserTie"
-              class="text-primary fs-3 mb-1"
-            ></fa-icon> -->
+          <img src="https://sujeitoprogramador.com/steve.png" alt="">           
           </div>
           <div
             class="d-flex userFoto align-items-center justify-content-center"
           >
             <fa-icon
+            class="btn btn-outline-light d-lg-none"
               [icon]="fabars"
               class="corBorda fs-3 mb-1"  
               (click)="toggleSidebar()"            
@@ -88,7 +94,7 @@
         <li class="nav-item">
           <a
             class="nav-link corLinks text-decoration-none"
-            routerLink="/manterCategoria"
+            routerLink="/departamento"
             routerLinkActive="active"
             >Departamentos</a
           >

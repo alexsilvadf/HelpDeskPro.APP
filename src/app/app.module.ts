@@ -19,6 +19,7 @@ import { LoadingComponent } from './core/loading/loading.component';
 import { LoadingInterceptor } from './core/loading/loading.interceptor';
 import { AppLayoutComponent } from './layout/app-layout/app-layout.component';
 import { AppMenuComponent } from './layout/app-menu/app-menu.component';
+import { ListarDepartamentoComponent } from './features/departamento/listar-departamento/listar-departamento.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AppMenuComponent } from './layout/app-menu/app-menu.component';
     LoadingComponent,
     AppLayoutComponent,
     AppMenuComponent,
+    ListarDepartamentoComponent,
   ],
   imports: [
     BrowserModule,
