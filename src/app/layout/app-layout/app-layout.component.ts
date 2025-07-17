@@ -10,7 +10,7 @@ import {
   templateUrl: './app-layout.component.html',
   styleUrls: ['./app-layout.component.css'],
 })
-export class AppLayoutComponent implements OnInit {
+export class AppLayoutComponent {
   faHeadphones = faHeadphones;
   fabars = faBars;
   faUserTie = faUserTie;
@@ -19,9 +19,7 @@ export class AppLayoutComponent implements OnInit {
 
   showSidebar: boolean = true;
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+
 
    toggleSidebar(): void {
     this.showSidebar = !this.showSidebar;

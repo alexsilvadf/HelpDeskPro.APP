@@ -79,12 +79,13 @@ export class ListarDepartamentoComponent implements OnInit {
     let query = event.query ? event.query.toLowerCase() : '';
 
     for (let i = 0; i < (this.departamentosGeral as any[]).length; i++) {
-      let categoria = (this.departamentosGeral as any[])[i];
+      let departamento = (this.departamentosGeral as any[])[i];
 
-      if (categoria?.nome && categoria.nome.toLowerCase().startsWith(query)) {
-        filtered.push(categoria);
+      if (departamento?.nome && departamento.nome.toLowerCase().startsWith(query)) {
+        filtered.push(departamento);
       }
     }
+       this.departamentosFiltrados = filtered;
   }
 
   departamentoSelecionado(event: any) {

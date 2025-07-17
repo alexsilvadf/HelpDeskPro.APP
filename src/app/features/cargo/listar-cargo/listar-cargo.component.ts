@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { CategoriaService } from 'src/app/core/services/categoria.service';
+import { CargoService } from 'src/app/core/services/cargo.service';
 import { StatusEnum } from 'src/app/core/status.enum';
 import { Colstable } from 'src/app/shared/components/table/inteface';
+// import { AutoCompleteCompleteEvent} from 'src/app/core/autoCompleteCompleteEvent'; 
 
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
@@ -13,38 +14,40 @@ interface AutoCompleteCompleteEvent {
 }
 
 @Component({
-  selector: 'app-listar-categoria',
-  templateUrl: './listar-categoria.component.html',
-  styleUrls: ['./listar-categoria.component.css'],
+  selector: 'app-listar-cargo',
+  templateUrl: './listar-cargo.component.html',
+  styleUrls: ['./listar-cargo.component.css'],
 })
-export class ListarCategoriaComponent implements OnInit {
-  categoriasGeral: any[] = [];
-  categorias: any[] = [];
-  categoriasFiltradas: any[] = [];
-  status: StatusEnum[] = [];
-  tituloModal: string = 'Adicionar Categoria';
 
-  form = this.fb.group({
-    nome: this.fb.control<string | null>(null),
-    status: this.fb.control<number | null>(-1),
-    statusSelecionado: this.fb.control<number | null>(-1),
-    categoria: this.fb.control<any | null>(null),
-    checked: this.fb.control<boolean>(false),
-  });
+
+export class ListarCargoComponent implements OnInit {
+  cargosGeral: any[] = [];
+  cargos: any[] = [];
+  cargosFiltrados: any[] = [];
+  status: StatusEnum[] = [];
+  tituloModal: string = 'Adicionar Cargo';
 
   colsTable: Colstable[] = [];
   mostrarModal: boolean = false;
   faPlus = faPlus;
 
+  form = this.fb.group({
+    nome: this.fb.control<string | null>(null),
+    status: this.fb.control<number | null>(-1),
+    statusSelecionado: this.fb.control<number | null>(-1),
+    cargo: this.fb.control<any | null>(null),
+    checked: this.fb.control<boolean>(false),
+  });
+
   constructor(
-    private categoriaService: CategoriaService,
+    private cargoService: CargoService,
     private messageService: MessageService,
     private confirmationservice: ConfirmationService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.carregarCategorias();
+     this.carregarCargos();
 
     this.status = [
       { codigo: 0, nome: 'Ativo' },
@@ -55,39 +58,62 @@ export class ListarCategoriaComponent implements OnInit {
     this.criarColunas();
   }
 
-  carregarCategorias() {
-    this.categoriaService
-      .getCategorias(this.form.controls.status.value as number)
-      .subscribe((resp) => {
-        if (resp) {
-          this.categorias = resp;
-          this.categoriasGeral = resp;
-        } else {
-          alert('Erro ao buscar categorias');
-        }
-      });
-  }
-
-  criarColunas() {
+   criarColunas() {
     this.colsTable = [
       { field: 'nome', header: 'Nome' },
       { field: 'statusDescricao', header: 'Status' },
     ];
   }
 
-  filtrarCategorias(event: any) {
+  filtrarCargos(event: any) {
     let filtered: any[] = [];
     let query = event.query ? event.query.toLowerCase() : '';
 
-    for (let i = 0; i < (this.categoriasGeral as any[]).length; i++) {
-      let categoria = (this.categoriasGeral as any[])[i];
+    for (let i = 0; i < (this.cargosGeral as any[]).length; i++) {
+      let cargo = (this.cargosGeral as any[])[i];
 
-      if (categoria?.nome && categoria.nome.toLowerCase().startsWith(query)) {
-        filtered.push(categoria);
+      if (cargo?.nome && cargo.nome.toLowerCase().startsWith(query)) {
+        filtered.push(cargo);
       }
     }
 
-    this.categoriasFiltradas = filtered;
+     this.cargosFiltrados = filtered;
+  }
+
+  cargoSelecionado(event: any) {
+    this.cargos = [];
+    this.cargos.push(event);
+  }
+
+  limparFiltros() {
+    this.carregarCargos();
+  }
+
+  carregarCargos() {
+    this.cargoService
+      .getCargos(this.form.controls.status.value as number)
+      .subscribe((resp) => {
+        if (resp) {
+          this.cargos = resp;
+          this.cargosGeral = resp;
+        } else {
+          alert('Erro ao buscar cargos');
+        }
+      });
+  }
+
+  buscarCargosPorStatus(event: any) {
+    this.form.reset();
+    this.form.controls.status.setValue(event.value.codigo);
+    this.carregarCargos();
+  }
+
+  adicionarCargo() {
+    this.form.reset();
+    this.mostrarModal = true;
+    this.tituloModal = 'Adicionar Cargo';
+    this.form.controls.nome.enable();
+    this.form.controls.status.setValue(0);
   }
 
   onItemSelecionado(e: any) {
@@ -96,14 +122,14 @@ export class ListarCategoriaComponent implements OnInit {
 
   excluirRegistro(e: any) {
     this.confirmationservice.confirm({
-      message: 'Deseja remover esta categoria?',
+      message: 'Deseja remover este cargo?',
       header: 'Atenção',
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Sim',
       rejectLabel: 'Não',
       accept: () => {
         let codigo = e.codigo;
-        this.categoriaService.excluirCategoria(codigo).subscribe((resp) => {
+        this.cargoService.excluirCargo(codigo).subscribe((resp) => {
           this.messageService.add({
             severity: 'success',
             summary: 'Sucesso',
@@ -111,7 +137,7 @@ export class ListarCategoriaComponent implements OnInit {
           });
 
           let resposta = resp;
-          this.carregarCategorias();
+          this.carregarCargos();
         });
       },
       reject: () => {
@@ -124,10 +150,10 @@ export class ListarCategoriaComponent implements OnInit {
     });
   }
 
-  editarCategoria(event: any) {
+  editarCargo(event: any) {
     this.mostrarModal = true;
     this.form.patchValue(event);
-    this.tituloModal = 'Editar Categoria';
+    this.tituloModal = 'Editar Cargo';
 
     if (event.status === 0) {
       this.form.controls.status.setValue(0);
@@ -138,14 +164,6 @@ export class ListarCategoriaComponent implements OnInit {
     this.form.controls.nome.disable();
   }
 
-  adicionarCatgoria() {
-    this.form.reset();
-    this.mostrarModal = true;
-    this.tituloModal = 'Adicionar Categoria';
-    this.form.controls.nome.enable();
-    this.form.controls.status.setValue(0);
-  }
-
   handleAdd() {
     if (!this.form.controls.nome.value) {
       this.messageService.add({
@@ -154,8 +172,8 @@ export class ListarCategoriaComponent implements OnInit {
       });
     }
 
-    this.categoriaService
-      .adicionarCategoria(this.form.getRawValue())
+    this.cargoService
+      .adicionarCargo(this.form.getRawValue())
       .subscribe((resp) => {
         this.messageService.add({
           severity: 'success',
@@ -166,22 +184,8 @@ export class ListarCategoriaComponent implements OnInit {
 
         this.form.reset();
         this.form.controls.status.setValue(-1);
-        this.carregarCategorias();
+        this.carregarCargos();
       });
-  }
 
-  categoriaSelecionada(event: any) {
-    this.categorias = [];
-    this.categorias.push(event);
-  }
-
-  limparFiltros() {
-    this.carregarCategorias();
-  }
-
-  buscarCategoriaPorStatus(event: any) {
-    this.form.reset();
-    this.form.controls.status.setValue(event.value.codigo);
-    this.carregarCategorias();
   }
 }

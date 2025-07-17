@@ -20,6 +20,7 @@ import { LoadingInterceptor } from './core/loading/loading.interceptor';
 import { AppLayoutComponent } from './layout/app-layout/app-layout.component';
 import { AppMenuComponent } from './layout/app-menu/app-menu.component';
 import { ListarDepartamentoComponent } from './features/departamento/listar-departamento/listar-departamento.component';
+import { ListarCargoComponent } from './features/cargo/listar-cargo/listar-cargo.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ListarDepartamentoComponent } from './features/departamento/listar-depa
     AppLayoutComponent,
     AppMenuComponent,
     ListarDepartamentoComponent,
+    ListarCargoComponent,
   ],
   imports: [
     BrowserModule,
