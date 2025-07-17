@@ -21,6 +21,7 @@ import { AppLayoutComponent } from './layout/app-layout/app-layout.component';
 import { AppMenuComponent } from './layout/app-menu/app-menu.component';
 import { ListarDepartamentoComponent } from './features/departamento/listar-departamento/listar-departamento.component';
 import { ListarCargoComponent } from './features/cargo/listar-cargo/listar-cargo.component';
+import { ListarPerfilComponent } from './features/perfil/listar-perfil/listar-perfil.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ListarCargoComponent } from './features/cargo/listar-cargo/listar-cargo
     AppMenuComponent,
     ListarDepartamentoComponent,
     ListarCargoComponent,
+    ListarPerfilComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { ListarCategoriaComponent } from './features/categoria/listar-categoria/
 import { ManterCategoriaComponent } from './features/categoria/manter-categoria/manter-categoria.component';
 import { ListarDepartamentoComponent } from './features/departamento/listar-departamento/listar-departamento.component';
 import { ListarCargoComponent } from './features/cargo/listar-cargo/listar-cargo.component';
+import { ListarPerfilComponent } from './features/perfil/listar-perfil/listar-perfil.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'manterCategoria', component: ManterCategoriaComponent },
       { path: 'departamento', component: ListarDepartamentoComponent },
       { path: 'cargo', component: ListarCargoComponent },
+      { path: 'perfil', component: ListarPerfilComponent },
     ],
   },
   { path: '**', redirectTo: '' },
