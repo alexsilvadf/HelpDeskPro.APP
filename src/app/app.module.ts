@@ -22,6 +22,8 @@ import { AppMenuComponent } from './layout/app-menu/app-menu.component';
 import { ListarDepartamentoComponent } from './features/departamento/listar-departamento/listar-departamento.component';
 import { ListarCargoComponent } from './features/cargo/listar-cargo/listar-cargo.component';
 import { ListarPerfilComponent } from './features/perfil/listar-perfil/listar-perfil.component';
+import { AuthInterceptor } from './core/auth.interceptor';
+import { LoginComponent } from './features/login/login/login.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { ListarPerfilComponent } from './features/perfil/listar-perfil/listar-pe
     ListarDepartamentoComponent,
     ListarCargoComponent,
     ListarPerfilComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,7 @@ import { ListarPerfilComponent } from './features/perfil/listar-perfil/listar-pe
     ConfirmDialogModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     MessageService,
     ConfirmationService,
   ],
