@@ -16,8 +16,8 @@ export class AuthService {
     return this.http.post<any>(`${this.api}/login`, { email, password });
   }
 
-  setToken(token: string) {
-    localStorage.setItem('token', token);
+  setToken(token: any) {
+    localStorage.setItem('token', JSON.stringify(token));
   }
 
   getToken() {

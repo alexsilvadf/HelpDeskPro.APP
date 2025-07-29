@@ -1,8 +1,37 @@
-<p>login works!</p>
+<!-- <p>login works!</p>
 <div>
   <h2>Login</h2>
   <input [(ngModel)]="email" placeholder="Usuário">
   <input [(ngModel)]="password" placeholder="Senha" type="password">
   <button (click)="login()">Entrar</button>
   <p *ngIf="erro">{{ erro }}</p>
+</div> -->
+<div class="container d-flex align-items-center justify-content-center vh-100">
+  <div class="card p-4 shadow w-100" style="max-width: 400px;">
+    <div class="text-center mb-4">
+      <i class="fa fa-user-circle fa-3x text-primary"></i>
+      <h4 class="mt-2">Login</h4>
+    </div>
+
+    <form (ngSubmit)="login()" [formGroup]="loginForm">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input pInputText type="email" id="email" formControlName="email" class="form-control" placeholder="Digite seu email">
+        <small *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+          Email inválido.
+        </small>
+      </div>
+
+      <div class="mb-3">
+        <label for="senha" class="form-label">Senha</label>
+        <input pPassword id="senha" formControlName="senha" class="form-control" placeholder="Digite sua senha">
+        <small *ngIf="senha.invalid && (senha.dirty || senha.touched)" class="text-danger">
+          Senha é obrigatória.
+        </small>
+      </div>
+
+      <button pButton type="submit" label="Entrar" class="w-100" [disabled]="loginForm.invalid"></button>
+    </form>
+  </div>
 </div>
+
