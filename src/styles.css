@@ -1,9 +1,19 @@
 /* ============================= */
 /* ======= CARD SECTION ====== */
 /* ============================= */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* impede rolagem no body */
+}
+
+
+
 .p-card {
   background-color: #f8f9fa;
-  width: 95vw;
+ width: 100%;
+  max-width: 100%;
   margin: 0 auto;
 }
 

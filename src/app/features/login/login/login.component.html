@@ -1,11 +1,4 @@
-<!-- <p>login works!</p>
-<div>
-  <h2>Login</h2>
-  <input [(ngModel)]="email" placeholder="Usuário">
-  <input [(ngModel)]="password" placeholder="Senha" type="password">
-  <button (click)="login()">Entrar</button>
-  <p *ngIf="erro">{{ erro }}</p>
-</div> -->
+<p-toast></p-toast>
 <div class="container d-flex align-items-center justify-content-center vh-100">
   <div class="card p-4 shadow w-100" style="max-width: 400px;">
     <div class="text-center mb-4">
@@ -24,7 +17,7 @@
 
       <div class="mb-3">
         <label for="senha" class="form-label">Senha</label>
-        <input pPassword id="senha" formControlName="senha" class="form-control" placeholder="Digite sua senha">
+        <input type="password" id="senha" formControlName="senha" class="form-control" placeholder="Digite sua senha">
         <small *ngIf="senha.invalid && (senha.dirty || senha.touched)" class="text-danger">
           Senha é obrigatória.
         </small>

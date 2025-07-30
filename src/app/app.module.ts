@@ -24,6 +24,7 @@ import { ListarCargoComponent } from './features/cargo/listar-cargo/listar-cargo
 import { ListarPerfilComponent } from './features/perfil/listar-perfil/listar-perfil.component';
 import { AuthInterceptor } from './core/auth.interceptor';
 import { LoginComponent } from './features/login/login/login.component';
+import { ListarChamadoComponent } from './features/chamado/listar-chamado/listar-chamado.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { LoginComponent } from './features/login/login/login.component';
     ListarCargoComponent,
     ListarPerfilComponent,
     LoginComponent,
+    ListarChamadoComponent,
   ],
   imports: [
     BrowserModule,

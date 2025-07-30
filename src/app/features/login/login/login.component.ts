@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit{
 
   
 
-   constructor(private auth: AuthService, private router: Router, private fb: FormBuilder) {}
+   constructor(private auth: AuthService, private router: Router, private fb: FormBuilder, private messageService: MessageService) {}
 
    
   ngOnInit(): void {
@@ -36,15 +37,7 @@ export class LoginComponent implements OnInit{
     return this.loginForm.get('senha')!;
   }
 
-  // onSubmit(): void {
-  //   this.auth.login(this.email, this.password).subscribe({
-  //     next: (res) => {
-  //       this.auth.setToken(res.resposta);
-  //       this.router.navigate(['/home']);
-  //     },
-  //     error: () => this.erro = 'Usuário ou senha inválidos'
-  //   });
-  // }
+
 
   login() {
     this.auth.login(this.loginForm.controls.email.value as any, this.loginForm.controls.senha.value as any).subscribe({
@@ -52,7 +45,13 @@ export class LoginComponent implements OnInit{
         this.auth.setToken(res.resposta);
         this.router.navigate(['/home']);
       },
-      error: () => this.erro = 'Usuário ou senha inválidos'
+      error: () => {
+          this.messageService.add({
+          severity: 'warn',
+          summary: 'Aviso',
+          detail: 'Usuário ou senha inválidos',
+        });
+      }
     });
   }
 
