@@ -9,6 +9,7 @@ import { ListarPerfilComponent } from './features/perfil/listar-perfil/listar-pe
 import { LoginComponent } from './features/login/login/login.component';
 import { AuthGuard } from './core/auth.guard';
 import { ListarChamadoComponent } from './features/chamado/listar-chamado/listar-chamado.component';
+import { ManterChamadoComponent } from './features/chamado/manter-chamado/manter-chamado.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'cargo', component: ListarCargoComponent, canActivate: [AuthGuard] },
       { path: 'perfil', component: ListarPerfilComponent, canActivate: [AuthGuard] },
       { path: 'listar-chamado', component: ListarChamadoComponent, canActivate: [AuthGuard] },
+      { path: 'manter-chamado', component: ManterChamadoComponent, canActivate: [AuthGuard] },
     ]
   }
 ];

@@ -25,6 +25,7 @@ import { ListarPerfilComponent } from './features/perfil/listar-perfil/listar-pe
 import { AuthInterceptor } from './core/auth.interceptor';
 import { LoginComponent } from './features/login/login/login.component';
 import { ListarChamadoComponent } from './features/chamado/listar-chamado/listar-chamado.component';
+import { ManterChamadoComponent } from './features/chamado/manter-chamado/manter-chamado.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ListarChamadoComponent } from './features/chamado/listar-chamado/listar
     ListarPerfilComponent,
     LoginComponent,
     ListarChamadoComponent,
+    ManterChamadoComponent,
   ],
   imports: [
     BrowserModule,

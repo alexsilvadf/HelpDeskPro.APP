@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-listar-chamado',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./listar-chamado.component.css']
 })
 export class ListarChamadoComponent {
+    faPlus = faPlus;
 
+ 
 }
