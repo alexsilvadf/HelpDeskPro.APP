@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit{
     this.auth.login(this.loginForm.controls.email.value as any, this.loginForm.controls.senha.value as any).subscribe({
       next: (res) => {
         this.auth.setToken(res.resposta);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/listar-chamado']);
       },
       error: () => {
           this.messageService.add({

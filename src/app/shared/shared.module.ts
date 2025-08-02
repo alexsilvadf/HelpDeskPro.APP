@@ -13,6 +13,9 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { CalendarModule } from 'primeng/calendar';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [ButtonComponent, TableComponent],
@@ -29,11 +32,12 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     DialogModule,
     InputTextModule,
     ToggleButtonModule,
-    RadioButtonModule
+    RadioButtonModule,
+    FileUploadModule
     
   ],
   imports: [CommonModule, TableModule, FontAwesomeModule, DialogModule, InputTextModule, ToggleButtonModule,
-    RadioButtonModule
+    RadioButtonModule, CalendarModule, InputTextareaModule, FileUploadModule
     ],
 })
 export class SharedModule {}

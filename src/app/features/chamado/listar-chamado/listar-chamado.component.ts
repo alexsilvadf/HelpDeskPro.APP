@@ -1,14 +1,137 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { ChamadoService } from 'src/app/core/services/chamado.service';
+import { StatusEnum } from 'src/app/core/status.enum';
+import { Colstable } from 'src/app/shared/components/table/inteface';
 
 @Component({
   selector: 'app-listar-chamado',
   templateUrl: './listar-chamado.component.html',
-  styleUrls: ['./listar-chamado.component.css']
+  styleUrls: ['./listar-chamado.component.css'],
 })
-export class ListarChamadoComponent {
-    faPlus = faPlus;
+export class ListarChamadoComponent implements OnInit {
+  faPlus = faPlus;
+  chamados: any[] = [];
+  chamadosFiltrados: any[] = [];
+  chamadosGeral: any[] = [];
+  status: StatusEnum[] = [];
 
- 
+  colsTable: Colstable[] = [];
+
+  tituloModal: string = 'Adicionar Categoria';
+
+  form = this.fb.group({
+    status: this.fb.control<number | null>(-1),
+    statusSelecionado: this.fb.control<number | null>(-1),
+    seqAno: this.fb.control<string | null>(null),
+    checked: this.fb.control<boolean>(false),
+    dataInicial: this.fb.control<Date | null>(null),
+    dataFinal: this.fb.control<Date | null>(null),
+  });
+
+  constructor(
+    private fb: FormBuilder,
+    private chamadoService: ChamadoService
+  ) {}
+
+  ngOnInit(): void {
+    this.criarColunas();
+    this.carregarChamados();
+  }
+
+   criarColunas() {
+    this.colsTable = [
+      { field: 'seqAno', header: 'Nº/Ano' },
+      { field: 'titulo', header: 'Título' },
+      { field: 'statusDescricao', header: 'Status' },
+    ];
+  }
+
+  filtrarChamados(event: any) {
+    let filtered: any[] = [];
+    let query = event.query ? event.query.toLowerCase() : '';
+
+    for (let i = 0; i < (this.chamadosGeral as any[]).length; i++) {
+      let categoria = (this.chamadosGeral as any[])[i];
+
+      if (categoria?.nome && categoria.nome.toLowerCase().startsWith(query)) {
+        filtered.push(categoria);
+      }
+    }
+    this.chamadosFiltrados = filtered;
+  }
+
+  chamadoSelecionado(event: any) {
+    this.chamados = [];
+    this.chamados.push(event);
+  }
+
+  limparFiltros() {
+    this.carregarChamados();
+  }
+
+  carregarChamados() {
+    const parametros = {};
+    this.chamadoService.getChamados(parametros).subscribe((resp) => {
+      if (resp) {
+        this.chamados = resp;
+        this.chamadosGeral = resp;
+      } else {
+        alert('Erro ao buscar categorias');
+      }
+    });
+  }
+
+  buscarChamadoPorStatus(event: any) {
+    this.form.reset();
+    this.form.controls.status.setValue(event.value.codigo);
+    this.carregarChamados();
+  }
+
+  onItemSelecionado(e: any) {
+    console.log(e);
+  }
+
+  excluirRegistro(e: any) {
+    // this.confirmationservice.confirm({
+    //   message: 'Deseja remover esta categoria?',
+    //   header: 'Atenção',
+    //   icon: 'pi pi-exclamation-triangle',
+    //   acceptLabel: 'Sim',
+    //   rejectLabel: 'Não',
+    //   accept: () => {
+    //     let codigo = e.codigo;
+    //     this.categoriaService.excluirCategoria(codigo).subscribe((resp) => {
+    //       this.messageService.add({
+    //         severity: 'success',
+    //         summary: 'Sucesso',
+    //         detail: resp.mensagem,
+    //       });
+    //       let resposta = resp;
+    //       this.carregarCategorias();
+    //     });
+    //   },
+    //   reject: () => {
+    //     this.messageService.add({
+    //       severity: 'info',
+    //       summary: 'Cancelado',
+    //       detail: 'Operação cancelada pelo usuário',
+    //     });
+    //   },
+    // });
+  }
+
+  editarChamado(event: any) {
+    // this.mostrarModal = true;
+    // this.form.patchValue(event);
+    // this.tituloModal = 'Editar Categoria';
+    // if (event.status === 0) {
+    //   this.form.controls.status.setValue(0);
+    // } else {
+    //   this.form.controls.status.setValue(1);
+    // }
+    // this.form.controls.nome.disable();
+  }
 }

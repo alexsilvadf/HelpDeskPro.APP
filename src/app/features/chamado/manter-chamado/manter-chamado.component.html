@@ -2,7 +2,6 @@
 <p-confirmDialog></p-confirmDialog>
 
 <p-card class="card">
-
   <div class="p-card-header">
     <div class="p-card-header-container">
       <i class="pi pi-cog"></i>
@@ -10,4 +9,81 @@
     </div>
   </div>
 
+  <p-panel>
+    <form [formGroup]="form">
+      <div class="form-group d-flex col-12">
+        <div class="mt-2 col-9">
+          <label for="categoria">Título</label>
+          <div>
+            <input
+              type="text"
+              pInputText
+              formControlName="titulo"
+              class="col-12"
+            />
+          </div>
+        </div>
+
+        <div class="mt-2 ms-3 col-3">
+          <label for="categoria">Prioridade</label>
+          <div class="col-12">
+            <p-dropdown
+              class="w-100"
+              [options]="status"
+              optionLabel="nome"
+              placeholder="Selecione o Status"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 mt-3">
+        <label for="categoria">Descreva o problema</label>
+        <div class="card flex justify-content-center">
+          <textarea
+            rows="5"
+            cols="30"
+            pInputTextarea
+            formControlName="descricaoProblema"
+          >
+          </textarea>
+        </div>
+      </div>
+
+      <div class="col-12 mt-3">
+        <div class="d-flex justify-content-between">
+          <div>
+            <p-fileUpload
+              mode="basic"
+              chooseLabel="Anexar Arquivo"
+              chooseIcon="pi pi-upload"
+              name="demo[]"
+              url="https://www.primefaces.org/cdn/api/upload.php"
+              accept="image/*"
+              [maxFileSize]="1000000"
+              (onUpload)="onUpload($event)"
+              (onSelect)="onSelect($event)"
+              (onProgress)="onProgress($event)"
+            />
+
+            <p *ngIf="uploadProgress >= 0">Progresso: {{ uploadProgress }}%</p>
+            <p *ngIf="uploadMessage">{{ uploadMessage }}</p>
+          </div>
+
+          <div>
+          <p-button
+            label="Salvar"
+            styleClass="p-button-Primary"
+            (click)="handleAdd()"
+            icon="pi pi-check"
+            iconPos="right"
+          />
+        </div>
+
+
+        </div>
+        
+      </div>
+    </form>
+  </p-panel>
 </p-card>
