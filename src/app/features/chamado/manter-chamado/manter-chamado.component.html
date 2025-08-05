@@ -10,79 +10,117 @@
   </div>
 
   <p-panel>
-    <form [formGroup]="form">
-      <div class="form-group d-flex col-12">
-        <div class="mt-2 col-9">
-          <label for="categoria">Título</label>
-          <div>
-            <input
-              type="text"
-              pInputText
-              formControlName="titulo"
-              class="col-12"
-            />
-          </div>
+    <form [formGroup]="form" class="p-3">
+      <!-- Linha: Título + Prioridade -->
+
+      <div class="d-flex col-12 justify-content-center">
+        <div class="col-6">
+          <label for="departamento">Departamento</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="departamento"
+            id="departamento"
+          />
         </div>
 
+        <div class="ms-3 mt-2 col-6">
+          <!-- <div class="mb-1">
+            <label for="categoria">Categoria</label>
+          </div> -->
+          <p-autoComplete
+            class="w-100"
+            formControlName="categorias"
+            [dropdown]="true"
+            [suggestions]="categoriasFiltradas"
+            (completeMethod)="filtrarCategorias($event)"
+            (onSelect)="categoriaSelecionada($event)"
+            placeholder="Selecione uma categoria"
+            field="nome"
+          >
+          </p-autoComplete>
+        </div>
+      </div>
+
+      <div class="form-group d-flex col-12">
+        <!-- Título -->
+        <div class="mt-2 col-9">
+          <label for="titulo">Título</label>
+          <input
+            id="titulo"
+            type="text"
+            pInputText
+            formControlName="titulo"
+            class="col-12"
+          />
+        </div>
+
+        <!-- Prioridade -->
         <div class="mt-2 ms-3 col-3">
-          <label for="categoria">Prioridade</label>
-          <div class="col-12">
+          <label for="status">Prioridade</label>
+          <div>
             <p-dropdown
               class="w-100"
+              formControlName="prioridade"
               [options]="status"
               optionLabel="nome"
-              placeholder="Selecione o Status"
-            />
+              optionValue="codigo"
+              placeholder="Selecione"
+            ></p-dropdown>
           </div>
         </div>
       </div>
 
+      <!-- Descrição -->
       <div class="col-12 mt-3">
-        <label for="categoria">Descreva o problema</label>
+        <label for="descricaoProblema">Descreva o problema</label>
         <div class="card flex justify-content-center">
           <textarea
+            id="descricaoProblema"
             rows="5"
             cols="30"
             pInputTextarea
+            class="w-100"
             formControlName="descricaoProblema"
-          >
-          </textarea>
+          ></textarea>
         </div>
       </div>
 
+      <!-- Upload + Botão -->
       <div class="col-12 mt-3">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between align-items-end">
+          <!-- Upload de Arquivo -->
           <div>
             <p-fileUpload
               mode="basic"
               chooseLabel="Anexar Arquivo"
               chooseIcon="pi pi-upload"
-              name="demo[]"
-              url="https://www.primefaces.org/cdn/api/upload.php"
+              name="anexo"
+              [customUpload]="true"
               accept="image/*"
               [maxFileSize]="1000000"
               (onUpload)="onUpload($event)"
               (onSelect)="onSelect($event)"
               (onProgress)="onProgress($event)"
-            />
+            ></p-fileUpload>
 
             <p *ngIf="uploadProgress >= 0">Progresso: {{ uploadProgress }}%</p>
             <p *ngIf="uploadMessage">{{ uploadMessage }}</p>
           </div>
 
+          <!-- Botão Salvar -->
           <div>
-          <p-button
-            label="Salvar"
-            styleClass="p-button-Primary"
-            (click)="handleAdd()"
-            icon="pi pi-check"
-            iconPos="right"
-          />
+            <button
+              type="button"
+              pButton
+              label="Salvar"
+              class="p-button-primary"
+              icon="pi pi-check"
+              iconPos="right"
+              (click)="handleAdd($event)"
+            ></button>
+          </div>
         </div>
-
-
-        </div>
-        
       </div>
     </form>
   </p-panel>

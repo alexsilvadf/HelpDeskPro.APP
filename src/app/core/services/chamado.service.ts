@@ -25,7 +25,7 @@ export class ChamadoService {
   //   return this.http.delete<{mensagem: string}>(`${this.baseUrl}/categoria/${codigo}`);
   // }
 
-  //   adicionarCategoria(categoria: any): Observable<any> {
-  //   return this.http.post(`${this.baseUrl}/categoria`, categoria);
-  // }
+    adicionarChamado(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/chamado/adicionar`, formData);
+  }
 }
