@@ -13,7 +13,7 @@ export class ChamadoService {
   constructor(private http: HttpClient) { }
 
   getChamados(params: any): Observable<any>{   
-    return this.http.post(`${this.baseUrl}/chamado/buscarTodos`, {params});
+    return this.http.post(`${this.baseUrl}/chamado/buscarTodos`, params);
   }
 
   //  getCategoria(codigo: number): Observable<any>{

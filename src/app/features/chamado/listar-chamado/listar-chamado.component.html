@@ -35,14 +35,15 @@
           />
         </div>
 
-        <div>   
-            <label for="categoria">Situação</label>    
+        <div>
+          <label for="categoria">Situação</label>
           <p-dropdown
             class="w-100"
             [options]="status"
             optionLabel="nome"
-            placeholder="Selecione o Status"
-            (onChange)="buscarChamadoPorStatus($event)"
+            optionValue="codigo"
+            placeholder="Selecione o Status"         
+            formControlName="statusSelecionado"
           />
         </div>
       </div>
@@ -55,9 +56,15 @@
       class="me-3 text-primary fs-2 pointer"
       routerLink="/manter-chamado"
     ></fa-icon>
+
+    <fa-icon
+      [icon]="faSearch"
+      class="ms-3 text-secondary fs-2 pointer"
+      (click)="carregarChamados()"
+    ></fa-icon>
   </div>
 
-    <app-table
+  <app-table
     [cols]="colsTable"
     [registros]="chamados"
     [totalRecords]="10"
@@ -65,8 +72,4 @@
     (onExcluir)="excluirRegistro($event)"
     (onEditar)="editarChamado($event)"
   ></app-table>
-
-
 </p-card>
-
-

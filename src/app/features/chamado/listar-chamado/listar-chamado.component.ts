@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { ChamadoService } from 'src/app/core/services/chamado.service';
 import { StatusEnum } from 'src/app/core/status.enum';
+import { StatusChamadoEnum } from 'src/app/core/statusChamado.enum';
 import { Colstable } from 'src/app/shared/components/table/inteface';
 
 @Component({
@@ -13,10 +14,11 @@ import { Colstable } from 'src/app/shared/components/table/inteface';
 })
 export class ListarChamadoComponent implements OnInit {
   faPlus = faPlus;
+  faSearch = faSearch;
   chamados: any[] = [];
   chamadosFiltrados: any[] = [];
   chamadosGeral: any[] = [];
-  status: StatusEnum[] = [];
+  status: StatusChamadoEnum[] = [];
 
   colsTable: Colstable[] = [];
 
@@ -24,7 +26,7 @@ export class ListarChamadoComponent implements OnInit {
 
   form = this.fb.group({
     status: this.fb.control<number | null>(-1),
-    statusSelecionado: this.fb.control<number | null>(-1),
+    statusSelecionado: this.fb.control<number | null>(null),
     seqAno: this.fb.control<string | null>(null),
     checked: this.fb.control<boolean>(false),
     dataInicial: this.fb.control<Date | null>(null),
@@ -38,6 +40,19 @@ export class ListarChamadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.criarColunas();
+
+     this.status = [
+      { codigo: 0, nome: 'Pendente' },
+      { codigo: 1, nome: 'Análise' },
+      { codigo: 2, nome: 'Finalizado' },
+      { codigo: -1, nome: 'Todos' },
+    ];
+
+    this.form.controls.statusSelecionado.valueChanges.subscribe((s) => {
+      this.form.controls.statusSelecionado.setValue(s);
+    });
+
+  
     this.carregarChamados();
   }
 
@@ -69,17 +84,24 @@ export class ListarChamadoComponent implements OnInit {
   }
 
   limparFiltros() {
+    this.form.reset();
     this.carregarChamados();
   }
 
   carregarChamados() {
-    const parametros = {};
+    const parametros = {
+      seqAno: this.form.controls.seqAno.value,
+      dataInicial: this.form.controls.dataInicial.value,
+      dataFinal: this.form.controls.dataFinal.value,
+      statusChamado: this.form.controls.statusSelecionado.value,
+    };
+
     this.chamadoService.getChamados(parametros).subscribe((resp) => {
       if (resp) {
         this.chamados = resp;
         this.chamadosGeral = resp;
       } else {
-        alert('Erro ao buscar categorias');
+        alert('Erro ao buscar Chamados');
       }
     });
   }
