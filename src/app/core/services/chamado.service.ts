@@ -21,9 +21,9 @@ export class ChamadoService {
   // }
 
 
-  // excluirCategoria(codigo: number){
-  //   return this.http.delete<{mensagem: string}>(`${this.baseUrl}/categoria/${codigo}`);
-  // }
+  excluirChamado(codigo: number){
+    return this.http.delete<{mensagem: string}>(`${this.baseUrl}/chamado/Excluir/${codigo}`);
+  }
 
     adicionarChamado(formData: FormData): Observable<any> {
     return this.http.post(`${this.baseUrl}/chamado/adicionar`, formData);

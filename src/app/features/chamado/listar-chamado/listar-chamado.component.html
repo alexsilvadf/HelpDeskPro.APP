@@ -73,3 +73,16 @@
     (onEditar)="editarChamado($event)"
   ></app-table>
 </p-card>
+
+  <div class="card flex justify-content-center">
+    <p-dialog
+      [modal]="true"
+      [(visible)]="mostrarModal"
+      [style]="{width: '80vw'}"
+      >
+      
+
+      <app-manter-chamado *ngIf="mostrarModal"></app-manter-chamado>
+    </p-dialog>
+  </div>
+

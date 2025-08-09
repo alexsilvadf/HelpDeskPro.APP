@@ -12,12 +12,13 @@ import { ChamadoService } from 'src/app/core/services/chamado.service';
 })
 export class ManterChamadoComponent implements OnInit {
   @Output() carregarChamados = new EventEmitter<boolean>();
-
+  tituloPagina = 'Abrir Chamado';
   uploadProgress: number = -1;
   uploadMessage: string = '';
   categorias: any[] = [];
   categoriasFiltradas: any[] = [];
   categoriasGeral: any[] = [];
+  edicao: boolean = false;
 
   arquivo: File | null = null;
 
@@ -40,6 +41,7 @@ export class ManterChamadoComponent implements OnInit {
       titulo: this.fb.control<string | null>(null),
       descricaoProblema: this.fb.control<string | null>(null),
       prioridade: this.fb.control<number | null>(0),
+      statusChamado: this.fb.control<number | null>(0),
       dataInicial: this.fb.control<Date | null>(null),
       dataFinal: this.fb.control<Date | null>(null),
       idCategoria: this.fb.control<number | null>(13),
@@ -54,9 +56,27 @@ export class ManterChamadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarCategorias();
+    //Pegar o departamento do usuário logado
     this.form.controls['departamento'].setValue('Secretaria de Obras');
+  }
 
-   
+  iniciar(chamado: any) {
+    this.tituloPagina = 'Editar Chamado';
+    this.edicao = true;
+    setTimeout(() => {
+      this.carregarCategorias();
+    }, 2000);
+
+    this.form.controls['titulo'].setValue(chamado.titulo);
+    this.form.controls['descricaoProblema'].setValue(chamado.descricaoProblema);
+    this.form.controls['prioridade'].setValue(chamado.prioridade);
+    this.form.controls['categoria'].setValue(chamado.idCategoria);
+
+    const categoriaEncontrada = this.categorias.find(
+      (c) => c.codigo === chamado.idCategoria
+    );
+
+    this.form.controls['categoria'].setValue(categoriaEncontrada);
   }
 
   carregarCategorias() {
@@ -91,8 +111,11 @@ export class ManterChamadoComponent implements OnInit {
     const formdata = new FormData();
     formdata.append('titulo', this.form.value.titulo);
     formdata.append('descricaoProblema', this.form.value.descricaoProblema);
-    formdata.append('statusChamado', String(this.form.value.prioridade ?? 0));
-    formdata.append('statusChamado', String(this.form.value.prioridade ?? 0));
+    formdata.append(
+      'statusChamado',
+      String(this.form.value.statusChamado ?? 0)
+    );
+    formdata.append('prioridade', String(this.form.value.prioridade ?? 0));
     formdata.append('idCategoria', String(this.form.value.idCategoria ?? 0));
     formdata.append(
       'idDepartamento',

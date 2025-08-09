@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ChamadoService } from 'src/app/core/services/chamado.service';
 import { StatusEnum } from 'src/app/core/status.enum';
 import { StatusChamadoEnum } from 'src/app/core/statusChamado.enum';
 import { Colstable } from 'src/app/shared/components/table/inteface';
+import { ManterChamadoComponent } from '../manter-chamado/manter-chamado.component';
 
 @Component({
   selector: 'app-listar-chamado',
@@ -13,6 +15,7 @@ import { Colstable } from 'src/app/shared/components/table/inteface';
   styleUrls: ['./listar-chamado.component.css'],
 })
 export class ListarChamadoComponent implements OnInit {
+  @ViewChild(ManterChamadoComponent) ManterChamadoComponent!: ManterChamadoComponent;
   faPlus = faPlus;
   faSearch = faSearch;
   chamados: any[] = [];
@@ -21,6 +24,8 @@ export class ListarChamadoComponent implements OnInit {
   status: StatusChamadoEnum[] = [];
 
   colsTable: Colstable[] = [];
+
+  mostrarModal = false;
 
   tituloModal: string = 'Adicionar Categoria';
 
@@ -31,17 +36,20 @@ export class ListarChamadoComponent implements OnInit {
     checked: this.fb.control<boolean>(false),
     dataInicial: this.fb.control<Date | null>(null),
     dataFinal: this.fb.control<Date | null>(null),
+    titulo: this.fb.control<string | null>(null)
   });
 
   constructor(
     private fb: FormBuilder,
-    private chamadoService: ChamadoService
+    private chamadoService: ChamadoService,
+    private confirmationservice: ConfirmationService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
     this.criarColunas();
 
-     this.status = [
+    this.status = [
       { codigo: 0, nome: 'Pendente' },
       { codigo: 1, nome: 'Análise' },
       { codigo: 2, nome: 'Finalizado' },
@@ -52,15 +60,15 @@ export class ListarChamadoComponent implements OnInit {
       this.form.controls.statusSelecionado.setValue(s);
     });
 
-  
     this.carregarChamados();
   }
 
-   criarColunas() {
+  criarColunas() {
     this.colsTable = [
       { field: 'seqAno', header: 'Nº/Ano' },
       { field: 'titulo', header: 'Título' },
       { field: 'statusDescricao', header: 'Status' },
+      { field: 'dataAbertura', header: 'Data Abertura' },
     ];
   }
 
@@ -100,6 +108,7 @@ export class ListarChamadoComponent implements OnInit {
       if (resp) {
         this.chamados = resp;
         this.chamadosGeral = resp;
+       
       } else {
         alert('Erro ao buscar Chamados');
       }
@@ -117,43 +126,73 @@ export class ListarChamadoComponent implements OnInit {
   }
 
   excluirRegistro(e: any) {
-    // this.confirmationservice.confirm({
-    //   message: 'Deseja remover esta categoria?',
-    //   header: 'Atenção',
-    //   icon: 'pi pi-exclamation-triangle',
-    //   acceptLabel: 'Sim',
-    //   rejectLabel: 'Não',
-    //   accept: () => {
-    //     let codigo = e.codigo;
-    //     this.categoriaService.excluirCategoria(codigo).subscribe((resp) => {
-    //       this.messageService.add({
-    //         severity: 'success',
-    //         summary: 'Sucesso',
-    //         detail: resp.mensagem,
-    //       });
-    //       let resposta = resp;
-    //       this.carregarCategorias();
-    //     });
-    //   },
-    //   reject: () => {
-    //     this.messageService.add({
-    //       severity: 'info',
-    //       summary: 'Cancelado',
-    //       detail: 'Operação cancelada pelo usuário',
-    //     });
-    //   },
-    // });
+    this.confirmationservice.confirm({
+      message: 'Deseja remover este chamado?',
+      header: 'Atenção',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      accept: () => {
+        let codigo = e.codigo;
+        this.chamadoService.excluirChamado(codigo).subscribe((resp) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Sucesso',
+            detail: resp.mensagem,
+          });
+          let resposta = resp;
+          this.carregarChamados();
+        });
+      },
+      reject: () => {
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Cancelado',
+          detail: 'Operação cancelada pelo usuário',
+        });
+      },
+    });
   }
 
   editarChamado(event: any) {
-    // this.mostrarModal = true;
-    // this.form.patchValue(event);
-    // this.tituloModal = 'Editar Categoria';
-    // if (event.status === 0) {
-    //   this.form.controls.status.setValue(0);
-    // } else {
-    //   this.form.controls.status.setValue(1);
-    // }
-    // this.form.controls.nome.disable();
+        this.mostrarModal = true;
+        this.tituloModal = 'Editar Chamado'
+
+         setTimeout(() => {
+      if (this.ManterChamadoComponent) {
+        this.ManterChamadoComponent.iniciar(event as any);
+      }
+    }, 1000);
+  
   }
+
+
+
+ handleAdd() {
+    // if (!this.form.controls.nome.value) {
+    //   this.messageService.add({
+    //     severity: 'warn',
+    //     detail: 'Campo nome é obrigatório',
+    //   });
+    // }
+
+    // this.categoriaService
+    //   .adicionarCategoria(this.form.getRawValue())
+    //   .subscribe((resp) => {
+    //     this.messageService.add({
+    //       severity: 'success',
+    //       detail: 'Registro salvo com sucesso',
+    //     });
+
+    //     this.mostrarModal = false;
+
+    //     this.form.reset();
+    //     this.form.controls.status.setValue(-1);
+    //     this.carregarCategorias();
+    //   });
+  }
+
+
+
+
 }
