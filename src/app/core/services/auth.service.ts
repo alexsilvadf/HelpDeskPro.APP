@@ -37,4 +37,24 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
   }
+
+  getPerfil(): string {
+    return localStorage.getItem('perfil') || '';
+  }
+
+   getMenus(): any[] {
+    const menus = localStorage.getItem('menus');
+    return menus ? JSON.parse(menus) : [];
+  }
+
+   salvarLogin(token: string, perfil: string, menus: any[]) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('perfil', perfil);
+    localStorage.setItem('menus', JSON.stringify(menus));
+  }
+
+  // logout() {
+  //   localStorage.clear();
+  // }
+
 }

@@ -42,7 +42,8 @@ export class LoginComponent implements OnInit{
   login() {
     this.auth.login(this.loginForm.controls.email.value as any, this.loginForm.controls.senha.value as any).subscribe({
       next: (res) => {
-        this.auth.setToken(res.resposta);
+        // this.auth.setToken(res.resposta);
+        this.auth.salvarLogin(res.resposta.token, res.resposta.perfil, res.resposta.menus);
         this.router.navigate(['/listar-chamado']);
       },
       error: () => {

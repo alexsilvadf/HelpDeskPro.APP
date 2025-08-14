@@ -14,27 +14,60 @@ import { ManterChamadoComponent } from './features/chamado/manter-chamado/manter
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,   
+    component: LoginComponent,
   },
   {
-     path: '',
+    path: '',
     component: AppLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-  
-   { path: 'home', component: AppLayoutComponent, canActivate: [AuthGuard] },
-    { path: 'categoria', component: ListarCategoriaComponent, canActivate: [AuthGuard] },
-      { path: 'manterCategoria', component: ManterCategoriaComponent, canActivate: [AuthGuard] },
-      { path: 'departamento', component: ListarDepartamentoComponent, canActivate: [AuthGuard] },
-      { path: 'cargo', component: ListarCargoComponent, canActivate: [AuthGuard] },
-      { path: 'perfil', component: ListarPerfilComponent, canActivate: [AuthGuard] },
-      { path: 'listar-chamado', component: ListarChamadoComponent, canActivate: [AuthGuard] },
-      { path: 'manter-chamado', component: ManterChamadoComponent, canActivate: [AuthGuard] },
-    ]
-  }
+      { path: 'home', component: AppLayoutComponent, canActivate: [AuthGuard],  data: { perfil: ['Admin', 'Gerente', 'User'] } },
+      {
+        path: 'categoria',
+        component: ListarCategoriaComponent,
+        canActivate: [AuthGuard],
+         data: { perfil: ['Admin', 'Gerente'] }
+      },
+      {
+        path: 'manterCategoria',
+        component: ManterCategoriaComponent,
+        canActivate: [AuthGuard],
+         data: { perfil: ['Admin', 'Gerente'] }
+      },
+      {
+        path: 'departamento',
+        component: ListarDepartamentoComponent,
+        canActivate: [AuthGuard],
+         data: { perfil: ['Admin', 'Gerente'] }
+      },
+      {
+        path: 'cargo',
+        component: ListarCargoComponent,
+        canActivate: [AuthGuard],
+         data: { perfil: ['Admin', 'Gerente'] }
+      },
+      {
+        path: 'perfil',
+        component: ListarPerfilComponent,
+        canActivate: [AuthGuard],
+         data: { perfil: ['Admin'] }
+      },
+      {
+        path: 'listar-chamado',
+        component: ListarChamadoComponent,
+        canActivate: [AuthGuard],
+        data: { perfil: ['Admin', 'Gerente', 'User'] }
+      },
+      {
+        path: 'manter-chamado',
+        component: ManterChamadoComponent,
+        canActivate: [AuthGuard],
+         data: { perfil: ['Admin', 'Gerente', 'User'] }
+       
+      },
+    ],
+  },
 ];
-
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

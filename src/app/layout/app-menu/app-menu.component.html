@@ -1,1 +1,10 @@
-<p>app-menu works!</p>
+<nav
+  class="bg-light p-3 d-none d-lg-block"
+  style="width: 200px; border-right: 1px solid #ccc"
+>
+  <ul class="nav flex-column">
+    <li class="nav-item" *ngFor="let menu of menus">
+      <a class="nav-link" [routerLink]="menu.rota">{{ menu.nome }}</a>
+    </li>
+  </ul>
+</nav>
