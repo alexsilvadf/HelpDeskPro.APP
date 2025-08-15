@@ -19,6 +19,7 @@ export class ManterChamadoComponent implements OnInit {
   categoriasFiltradas: any[] = [];
   categoriasGeral: any[] = [];
   edicao: boolean = false;
+  tipoTela: string = "";
 
   arquivo: File | null = null;
 
@@ -65,7 +66,9 @@ export class ManterChamadoComponent implements OnInit {
   }
   }
 
-  iniciar(chamado: any) {
+  iniciar(chamado: any, tela?: string) {
+    if(tela !== 'Atendimento'){
+
     this.tituloPagina = 'Editar Chamado';
     this.edicao = true;
     setTimeout(() => {
@@ -82,6 +85,28 @@ export class ManterChamadoComponent implements OnInit {
     );
 
     this.form.controls['categoria'].setValue(categoriaEncontrada);
+  }else{
+    this.tituloPagina = 'Atender Chamado';
+    this.tipoTela = 'Atendimento';
+
+     setTimeout(() => {
+      this.carregarCategorias();
+    }, 2000);
+
+    this.form.controls['titulo'].setValue(chamado.titulo);
+    this.form.controls['descricaoProblema'].setValue(chamado.descricaoProblema);
+    this.form.controls['prioridade'].setValue(chamado.prioridade);
+    this.form.controls['categoria'].setValue(chamado.idCategoria);
+
+    const categoriaEncontrada = this.categorias.find(
+      (c) => c.codigo === chamado.idCategoria
+    );
+
+    this.form.controls['categoria'].setValue(categoriaEncontrada);
+
+    this.form.controls['titulo'].disable();
+    this.form.controls['descricaoProblema'].disable();
+  }
   }
 
   carregarCategorias() {
