@@ -55,6 +55,12 @@ export class ManterChamadoComponent implements OnInit {
     });
   }
 
+   situacaoChamado = [
+      { codigo: 0, nome: 'Pendente' },
+      { codigo: 1, nome: 'Análise' },
+      { codigo: 2, nome: 'Finalizado' },
+    ];
+
   ngOnInit(): void {
     this.carregarCategorias();
     //Pegar o departamento do usuário logado
@@ -67,13 +73,13 @@ export class ManterChamadoComponent implements OnInit {
   }
 
   iniciar(chamado: any, tela?: string) {
-    if(tela !== 'Atendimento'){
-
+    if(tela !== 'Atendimento'){     
+     
     this.tituloPagina = 'Editar Chamado';
     this.edicao = true;
     setTimeout(() => {
       this.carregarCategorias();
-    }, 2000);
+    }, 1000);
 
     this.form.controls['titulo'].setValue(chamado.titulo);
     this.form.controls['descricaoProblema'].setValue(chamado.descricaoProblema);
@@ -88,10 +94,15 @@ export class ManterChamadoComponent implements OnInit {
   }else{
     this.tituloPagina = 'Atender Chamado';
     this.tipoTela = 'Atendimento';
+    this.edicao = true;
+
+
+  this.form.controls['statusChamado'].setValue(chamado.statusChamado);
+
 
      setTimeout(() => {
       this.carregarCategorias();
-    }, 2000);
+    }, 1000);
 
     this.form.controls['titulo'].setValue(chamado.titulo);
     this.form.controls['descricaoProblema'].setValue(chamado.descricaoProblema);

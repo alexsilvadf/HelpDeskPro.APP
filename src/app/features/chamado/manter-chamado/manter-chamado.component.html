@@ -17,17 +17,16 @@
           <div class="mb-1">
             <label for="categoria">Status do chamado</label>
           </div>
-          <p-autoComplete
-            class="w-100"       
-            [dropdown]="true"
-            formControlName="categoria"
-            [suggestions]="categoriasFiltradas"
-            (completeMethod)="filtrarCategorias($event)"
-            (onSelect)="categoriaSelecionada($event)"
-            placeholder="Selecione uma categoria"
-            field="nome"
-          >
-          </p-autoComplete>
+          <div>         
+           <p-dropdown
+            class="w-100"
+            [options]="situacaoChamado"
+            optionLabel="nome"
+            optionValue="codigo"
+            placeholder="Selecione o Status"         
+            formControlName="statusChamado"
+          />
+        </div>
         </div>
 
 
@@ -102,6 +101,20 @@
             pInputTextarea
             class="w-100"
             formControlName="descricaoProblema"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="col-12 mt-3">
+        <label for="descricaoProblema">Resolução do problema</label>
+        <div class="card flex justify-content-center">
+          <textarea
+            id="resolucaoProblema"
+            rows="5"
+            cols="30"
+            pInputTextarea
+            class="w-100"
+            formControlName="resolucaoProblema"
           ></textarea>
         </div>
       </div>
