@@ -192,6 +192,12 @@ export class AtenderChamadoComponent implements OnInit{
      //     this.carregarCategorias();
      //   });
    }
+
+
+   receberNotifica(event: any){
+    this.carregarChamados();
+         this.mostrarModal = false;
+   }
  
 
 }

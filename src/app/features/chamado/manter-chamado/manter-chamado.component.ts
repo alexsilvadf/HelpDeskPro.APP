@@ -19,7 +19,7 @@ export class ManterChamadoComponent implements OnInit {
   categoriasFiltradas: any[] = [];
   categoriasGeral: any[] = [];
   edicao: boolean = false;
-  tipoTela: string = "";
+  tipoTela: string = '';
 
   arquivo: File | null = null;
 
@@ -39,8 +39,10 @@ export class ManterChamadoComponent implements OnInit {
     private categoriaService: CategoriaService
   ) {
     this.form = this.fb.group({
+      numeroChamado: this.fb.control<number | null>(null),
       titulo: this.fb.control<string | null>(null),
       descricaoProblema: this.fb.control<string | null>(null),
+      resolucaoProblema: this.fb.control<string | null>(null),
       prioridade: this.fb.control<number | null>(0),
       statusChamado: this.fb.control<number | null>(0),
       dataInicial: this.fb.control<Date | null>(null),
@@ -55,11 +57,11 @@ export class ManterChamadoComponent implements OnInit {
     });
   }
 
-   situacaoChamado = [
-      { codigo: 0, nome: 'Pendente' },
-      { codigo: 1, nome: 'Análise' },
-      { codigo: 2, nome: 'Finalizado' },
-    ];
+  situacaoChamado = [
+    { codigo: 0, nome: 'Pendente' },
+    { codigo: 1, nome: 'Análise' },
+    { codigo: 2, nome: 'Finalizado' },
+  ];
 
   ngOnInit(): void {
     this.carregarCategorias();
@@ -68,56 +70,58 @@ export class ManterChamadoComponent implements OnInit {
     const departamento = localStorage.getItem('departamento');
 
     if (departamento) {
-    this.form.controls['departamento'].setValue(departamento);
-  }
+      this.form.controls['departamento'].setValue(departamento);
+    }
   }
 
   iniciar(chamado: any, tela?: string) {
-    if(tela !== 'Atendimento'){     
-     
-    this.tituloPagina = 'Editar Chamado';
-    this.edicao = true;
-    setTimeout(() => {
-      this.carregarCategorias();
-    }, 1000);
+    if (tela !== 'Atendimento') {
+      this.tituloPagina = 'Editar Chamado';
+      this.edicao = true;
+      setTimeout(() => {
+        this.carregarCategorias();
+      }, 1000);
 
-    this.form.controls['titulo'].setValue(chamado.titulo);
-    this.form.controls['descricaoProblema'].setValue(chamado.descricaoProblema);
-    this.form.controls['prioridade'].setValue(chamado.prioridade);
-    this.form.controls['categoria'].setValue(chamado.idCategoria);
+      this.form.controls['titulo'].setValue(chamado.titulo);
+      this.form.controls['descricaoProblema'].setValue(
+        chamado.descricaoProblema
+      );
+      this.form.controls['prioridade'].setValue(chamado.prioridade);
+      this.form.controls['categoria'].setValue(chamado.idCategoria);
 
-    const categoriaEncontrada = this.categorias.find(
-      (c) => c.codigo === chamado.idCategoria
-    );
+      const categoriaEncontrada = this.categorias.find(
+        (c) => c.codigo === chamado.idCategoria
+      );
 
-    this.form.controls['categoria'].setValue(categoriaEncontrada);
-  }else{
-    this.tituloPagina = 'Atender Chamado';
-    this.tipoTela = 'Atendimento';
-    this.edicao = true;
+      this.form.controls['categoria'].setValue(categoriaEncontrada);
+    } else {
+      this.tituloPagina = 'Atender Chamado';
+      this.tipoTela = 'Atendimento';
+      this.edicao = true;
 
+      this.form.controls['statusChamado'].setValue(chamado.statusChamado);
+      this.form.controls['numeroChamado'].setValue(chamado.codigo);
 
-  this.form.controls['statusChamado'].setValue(chamado.statusChamado);
+      setTimeout(() => {
+        this.carregarCategorias();
+      }, 1000);
 
+      this.form.controls['titulo'].setValue(chamado.titulo);
+      this.form.controls['descricaoProblema'].setValue(
+        chamado.descricaoProblema
+      );
+      this.form.controls['prioridade'].setValue(chamado.prioridade);
+      this.form.controls['categoria'].setValue(chamado.idCategoria);
 
-     setTimeout(() => {
-      this.carregarCategorias();
-    }, 1000);
+      const categoriaEncontrada = this.categorias.find(
+        (c) => c.codigo === chamado.idCategoria
+      );
 
-    this.form.controls['titulo'].setValue(chamado.titulo);
-    this.form.controls['descricaoProblema'].setValue(chamado.descricaoProblema);
-    this.form.controls['prioridade'].setValue(chamado.prioridade);
-    this.form.controls['categoria'].setValue(chamado.idCategoria);
+      this.form.controls['categoria'].setValue(categoriaEncontrada);
 
-    const categoriaEncontrada = this.categorias.find(
-      (c) => c.codigo === chamado.idCategoria
-    );
-
-    this.form.controls['categoria'].setValue(categoriaEncontrada);
-
-    this.form.controls['titulo'].disable();
-    this.form.controls['descricaoProblema'].disable();
-  }
+      this.form.controls['titulo'].disable();
+      this.form.controls['descricaoProblema'].disable();
+    }
   }
 
   carregarCategorias() {
@@ -187,6 +191,35 @@ export class ManterChamadoComponent implements OnInit {
         });
       },
     });
+  }
+
+  handleUpdate(event: any) {
+    this.chamadoService
+      .atualizarChamado(
+        this.form.controls['statusChamado'].value,
+        this.form.controls['resolucaoProblema'].value,
+        this.form.controls['numeroChamado'].value
+      )
+      .subscribe({
+        next: (resp) => {
+          this.messageService.add({
+            severity: 'success',
+            detail: 'Registro salvo com sucesso',
+          });
+
+          this.form.reset();
+          // this.form.controls['prioridade'].setValue(0);
+          this.arquivo = null;
+          this.router.navigateByUrl('/atender-chamado');
+          this.carregarChamados.emit(true);
+        },
+        error: (err) => {
+          this.messageService.add({
+            severity: 'error',
+            detail: 'Erro ao salvar o chamado',
+          });
+        },
+      });
   }
 
   // Disparado quando o usuário seleciona um arquivo

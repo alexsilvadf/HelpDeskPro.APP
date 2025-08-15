@@ -142,7 +142,7 @@
           </div>
 
           <!-- Botão Salvar -->
-          <div>
+          <div *ngIf="!edicao">
             <button
               type="button"
               pButton
@@ -153,6 +153,19 @@
               (click)="handleAdd($event)"
             ></button>
           </div>
+
+          <div>
+            <button
+              type="button"
+              pButton
+              label="Atualizar Chamado"
+              class="p-button-primary"
+              icon="pi pi-check"
+              iconPos="right"
+              (click)="handleUpdate($event)"
+            ></button>
+          </div>
+
         </div>
       </div>
     </form>

@@ -82,7 +82,7 @@
       >
       
 
-      <app-manter-chamado *ngIf="mostrarModal"></app-manter-chamado>
+      <app-manter-chamado *ngIf="mostrarModal" (carregarChamados)="receberNotifica($event)"></app-manter-chamado>
     </p-dialog>
   </div>
 

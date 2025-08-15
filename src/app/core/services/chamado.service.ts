@@ -28,4 +28,8 @@ export class ChamadoService {
     adicionarChamado(formData: FormData): Observable<any> {
     return this.http.post(`${this.baseUrl}/chamado/adicionar`, formData);
   }
+
+    atualizarChamado(statusChamado: number, resolucaoProblema: string, numeroChamado: number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/chamado/atualizar/`, {statusChamado, resolucaoProblema, numeroChamado});
+  }
 }
