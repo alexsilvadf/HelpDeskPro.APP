@@ -16,6 +16,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FileUploadModule } from 'primeng/fileupload';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [ButtonComponent, TableComponent],
@@ -33,7 +34,9 @@ import { FileUploadModule } from 'primeng/fileupload';
     InputTextModule,
     ToggleButtonModule,
     RadioButtonModule,
-    FileUploadModule
+    FileUploadModule,
+    ConfirmDialogModule,
+    CalendarModule
     
   ],
   imports: [CommonModule, TableModule, FontAwesomeModule, DialogModule, InputTextModule, ToggleButtonModule,

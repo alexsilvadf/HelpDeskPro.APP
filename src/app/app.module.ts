@@ -26,6 +26,8 @@ import { AuthInterceptor } from './core/auth.interceptor';
 import { LoginComponent } from './features/login/login/login.component';
 import { ListarChamadoComponent } from './features/chamado/listar-chamado/listar-chamado.component';
 import { ManterChamadoComponent } from './features/chamado/manter-chamado/manter-chamado.component';
+import { AtenderChamadoComponent } from './features/chamado/atender-chamado/atender-chamado.component';
+import { ChamadoModule } from './features/chamado/chamado.module';
 
 @NgModule({
   declarations: [
@@ -39,8 +41,9 @@ import { ManterChamadoComponent } from './features/chamado/manter-chamado/manter
     ListarCargoComponent,
     ListarPerfilComponent,
     LoginComponent,
-    ListarChamadoComponent,
-    ManterChamadoComponent,
+    // ListarChamadoComponent,
+    // ManterChamadoComponent,
+    // AtenderChamadoComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ import { ManterChamadoComponent } from './features/chamado/manter-chamado/manter
     FormsModule,
     ToastModule,
     ConfirmDialogModule,
+    ChamadoModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

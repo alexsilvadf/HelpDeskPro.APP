@@ -5,9 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ListarChamadoComponent } from './listar-chamado/listar-chamado.component';
+import { ManterChamadoComponent } from './manter-chamado/manter-chamado.component';
+import { AtenderChamadoComponent } from './atender-chamado/atender-chamado.component';
 
 @NgModule({
-  declarations: [ListarChamadoComponent],
+  declarations: [ListarChamadoComponent,  ManterChamadoComponent, AtenderChamadoComponent],
   exports: [],
   imports: [
     CommonModule,

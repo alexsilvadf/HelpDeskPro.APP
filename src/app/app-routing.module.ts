@@ -10,6 +10,7 @@ import { LoginComponent } from './features/login/login/login.component';
 import { AuthGuard } from './core/auth.guard';
 import { ListarChamadoComponent } from './features/chamado/listar-chamado/listar-chamado.component';
 import { ManterChamadoComponent } from './features/chamado/manter-chamado/manter-chamado.component';
+import { AtenderChamadoComponent } from './features/chamado/atender-chamado/atender-chamado.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
     component: AppLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'home', component: AppLayoutComponent, canActivate: [AuthGuard],  data: { perfil: ['Admin', 'Gerente', 'User'] } },
+      { path: 'home', component: AppLayoutComponent, canActivate: [AuthGuard],  data: { perfil: ['Admin', 'Gerente', 'User', 'Suport'] } },
       {
         path: 'categoria',
         component: ListarCategoriaComponent,
@@ -63,6 +64,13 @@ const routes: Routes = [
         component: ManterChamadoComponent,
         canActivate: [AuthGuard],
          data: { perfil: ['Admin', 'Gerente', 'User'] }
+       
+      },
+       {
+        path: 'atender-chamado',
+        component: AtenderChamadoComponent,
+        canActivate: [AuthGuard],
+         data: { perfil: ['Admin', 'Gerente', 'Suport'] }
        
       },
     ],

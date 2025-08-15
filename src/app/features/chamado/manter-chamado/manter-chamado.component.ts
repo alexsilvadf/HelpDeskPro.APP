@@ -57,7 +57,12 @@ export class ManterChamadoComponent implements OnInit {
   ngOnInit(): void {
     this.carregarCategorias();
     //Pegar o departamento do usuário logado
-    this.form.controls['departamento'].setValue('Secretaria de Obras');
+    // this.form.controls['departamento'].setValue('Secretaria de Obras');
+    const departamento = localStorage.getItem('departamento');
+
+    if (departamento) {
+    this.form.controls['departamento'].setValue(departamento);
+  }
   }
 
   iniciar(chamado: any) {

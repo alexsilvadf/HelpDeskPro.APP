@@ -2,12 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import jwtDecode from 'jwt-decode';
 
-
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-
-  
-
   private api = 'https://localhost:7101/api/Authentication';
 
   constructor(private http: HttpClient) {}
@@ -36,25 +32,28 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('perfil');
+    localStorage.removeItem('menus');
+    localStorage.removeItem('departamento');
   }
 
   getPerfil(): string {
     return localStorage.getItem('perfil') || '';
   }
 
-   getMenus(): any[] {
+  getMenus(): any[] {
     const menus = localStorage.getItem('menus');
     return menus ? JSON.parse(menus) : [];
   }
 
-   salvarLogin(token: string, perfil: string, menus: any[]) {
+  salvarLogin(token: string, perfil: string, departamento: string,  menus: any[]) {
     localStorage.setItem('token', token);
     localStorage.setItem('perfil', perfil);
+    localStorage.setItem('departamento', departamento);
     localStorage.setItem('menus', JSON.stringify(menus));
   }
 
   // logout() {
   //   localStorage.clear();
   // }
-
 }
