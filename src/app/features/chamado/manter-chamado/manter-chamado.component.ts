@@ -65,6 +65,7 @@ export class ManterChamadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarCategorias();
+     this.form.get('statusChamado')?.disable();
     //Pegar o departamento do usuário logado
     // this.form.controls['departamento'].setValue('Secretaria de Obras');
     const departamento = localStorage.getItem('departamento');
@@ -94,6 +95,7 @@ export class ManterChamadoComponent implements OnInit {
       );
 
       this.form.controls['categoria'].setValue(categoriaEncontrada);
+     
     } else {
       this.tituloPagina = 'Atender Chamado';
       this.tipoTela = 'Atendimento';
@@ -101,6 +103,7 @@ export class ManterChamadoComponent implements OnInit {
 
       this.form.controls['statusChamado'].setValue(chamado.statusChamado);
       this.form.controls['numeroChamado'].setValue(chamado.codigo);
+       this.form.get('statusChamado')?.enable();
 
       setTimeout(() => {
         this.carregarCategorias();

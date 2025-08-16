@@ -24,7 +24,7 @@
             optionLabel="nome"
             optionValue="codigo"
             placeholder="Selecione o Status"         
-            formControlName="statusChamado"
+            formControlName="statusChamado" 
           />
         </div>
         </div>
@@ -154,7 +154,7 @@
             ></button>
           </div>
 
-          <div>
+          <div *ngIf="edicao">
             <button
               type="button"
               pButton

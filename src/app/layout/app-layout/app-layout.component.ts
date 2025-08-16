@@ -15,6 +15,7 @@ export class AppLayoutComponent {
   fabars = faBars;
   faUserTie = faUserTie;
 
+
   widthSideBar = '280px';
 
   showSidebar: boolean = true;

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ChamadoService } from 'src/app/core/services/chamado.service';
@@ -43,7 +43,8 @@ export class ListarChamadoComponent implements OnInit {
     private fb: FormBuilder,
     private chamadoService: ChamadoService,
     private confirmationservice: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -190,6 +191,11 @@ export class ListarChamadoComponent implements OnInit {
     //     this.form.controls.status.setValue(-1);
     //     this.carregarCategorias();
     //   });
+  }
+
+
+  abrirModalChamado(){
+      this.router.navigateByUrl('/manter-chamado');
   }
 
 
