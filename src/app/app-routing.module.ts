@@ -22,55 +22,55 @@ const routes: Routes = [
     component: AppLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'home', component: AppLayoutComponent, canActivate: [AuthGuard],  data: { perfil: ['Admin', 'Gerente', 'User', 'Suport'] } },
+      { path: 'home', component: AppLayoutComponent, canActivate: [AuthGuard],  data: { perfil: ['Administrador', 'Gerente', 'User', 'Suport'] } },
       {
         path: 'categoria',
         component: ListarCategoriaComponent,
         canActivate: [AuthGuard],
-         data: { perfil: ['Admin', 'Gerente'] }
+         data: { perfil: ['Administrador', 'Gerente'] }
       },
       {
         path: 'manterCategoria',
         component: ManterCategoriaComponent,
         canActivate: [AuthGuard],
-         data: { perfil: ['Admin', 'Gerente'] }
+         data: { perfil: ['Administrador', 'Gerente'] }
       },
       {
         path: 'departamento',
         component: ListarDepartamentoComponent,
         canActivate: [AuthGuard],
-         data: { perfil: ['Admin', 'Gerente'] }
+         data: { perfil: ['Administrador', 'Gerente'] }
       },
       {
         path: 'cargo',
         component: ListarCargoComponent,
         canActivate: [AuthGuard],
-         data: { perfil: ['Admin', 'Gerente'] }
+         data: { perfil: ['Administrador', 'Gerente'] }
       },
       {
         path: 'perfil',
         component: ListarPerfilComponent,
         canActivate: [AuthGuard],
-         data: { perfil: ['Admin'] }
+         data: { perfil: ['Administrador'] }
       },
       {
         path: 'listar-chamado',
         component: ListarChamadoComponent,
         canActivate: [AuthGuard],
-        data: { perfil: ['Admin', 'Gerente', 'User'] }
+        data: { perfil: ['Administrador', 'Gerente', 'User'] }
       },
       {
         path: 'manter-chamado',
         component: ManterChamadoComponent,
         canActivate: [AuthGuard],
-         data: { perfil: ['Admin', 'Gerente', 'User'] }
+         data: { perfil: ['Administrador', 'Gerente', 'User'] }
        
       },
        {
         path: 'atender-chamado',
         component: AtenderChamadoComponent,
         canActivate: [AuthGuard],
-         data: { perfil: ['Admin', 'Gerente', 'Suport'] }
+         data: { perfil: ['Administrador', 'Gerente', 'Suport'] }
        
       },
     ],

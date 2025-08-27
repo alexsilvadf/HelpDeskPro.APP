@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import jwtDecode from 'jwt-decode';
+import { environment } from 'src/environments/environments';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private api = 'https://localhost:7101/api/Authentication';
+  private api = `${environment.urlApi}/Authentication`; //'http://localhost:8080/api/Authentication';
 
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string) {
+    // return this.http.post<any>(`${this.api}/login`, { email, password });
     return this.http.post<any>(`${this.api}/login`, { email, password });
   }
 
