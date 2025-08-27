@@ -87,8 +87,6 @@ export class ListarCategoriaComponent implements OnInit {
       }
     }
 
-   
-
     this.categoriasFiltradas = filtered;
   }
 
@@ -159,7 +157,6 @@ export class ListarCategoriaComponent implements OnInit {
     this.categoriaService
       .adicionarCategoria(this.form.getRawValue())
       .subscribe((resp) => {
-
         this.messageService.add({
           severity: 'success',
           detail: 'Registro salvo com sucesso',
@@ -167,20 +164,15 @@ export class ListarCategoriaComponent implements OnInit {
 
         this.mostrarModal = false;
 
-         this.form.reset();
-  this.form.controls.status.setValue(-1);
+        this.form.reset();
+        this.form.controls.status.setValue(-1);
         this.carregarCategorias();
-      
-
-    
       });
   }
 
   categoriaSelecionada(event: any) {
-
     this.categorias = [];
     this.categorias.push(event);
-  
   }
 
   limparFiltros() {

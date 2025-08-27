@@ -1,0 +1,88 @@
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<p-card class="card">
+  <div class="p-card-header">
+    <div class="p-card-header-container">
+      <i class="pi pi-cog"></i>
+      <h3>Listagem Chamados</h3>
+    </div>
+  </div>
+
+  <p-panel>
+    <form [formGroup]="form">
+      <div class="form-group d-flex col-12">
+        <div class="mb-1">
+          <label for="categoria">Nº/Ano</label>
+          <input type="text" pInputText formControlName="seqAno" />
+        </div>
+
+        <div class="mb-1">
+          <label for="categoria">Data Inicial</label>
+          <p-calendar
+            formControlName="dataInicial"
+            [showIcon]="true"
+            inputId="icondisplay"
+          />
+        </div>
+
+        <div class="mb-1">
+          <label for="categoria">Data Final</label>
+          <p-calendar
+            formControlName="dataFinal"
+            [showIcon]="true"
+            inputId="icondisplay"
+          />
+        </div>
+
+        <div>
+          <label for="categoria">Situação</label>
+          <p-dropdown
+            class="w-100"
+            [options]="status"
+            optionLabel="nome"
+            optionValue="codigo"
+            placeholder="Selecione o Status"         
+            formControlName="statusSelecionado"
+          />
+        </div>
+      </div>
+    </form>
+  </p-panel>
+
+  <div class="d-flex col-12 justify-content-end m-3 ms-0">
+    <fa-icon
+      [icon]="faPlus"
+      class="me-3 text-primary fs-2 pointer"
+      routerLink="/manter-chamado"
+    ></fa-icon>
+
+    <fa-icon
+      [icon]="faSearch"
+      class="ms-3 text-secondary fs-2 pointer"
+      (click)="carregarChamados()"
+    ></fa-icon>
+  </div>
+
+  <app-table
+    [cols]="colsTable"
+    [registros]="chamados"
+    [totalRecords]="10"
+    (itemSelecionado)="onItemSelecionado($event)"
+    (onExcluir)="excluirRegistro($event)"
+    (onEditar)="editarChamado($event)"
+  ></app-table>
+</p-card>
+
+  <div class="card flex justify-content-center">
+    <p-dialog
+      [modal]="true"
+      [(visible)]="mostrarModal"
+      [style]="{width: '80vw'}"
+      >
+      
+
+      <app-manter-chamado *ngIf="mostrarModal" (carregarChamados)="receberNotifica($event)"></app-manter-chamado>
+    </p-dialog>
+  </div>
+

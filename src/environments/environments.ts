@@ -1,4 +1,6 @@
 export const environment = {
     production: false,
-    urlApi: 'https://localhost:7101/api'
+    // urlApi: 'http://localhost:8080/api'
+    urlApi: 'https://helpdeskpro-api.onrender.com/api'
 }
+

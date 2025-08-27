@@ -1,22 +1,18 @@
-<div class="d-flex flex-column" style="height: 100vh">
-  <!-- Cabeçalho -->
+<!-- layout.component.html -->
+<div class="d-flex flex-column vh-100" style="height: 100vh">
+  <!-- Header -->
   <header
-    class="bg-primary text-white p-2 d-flex justify-content-between align-items-center"
+    class="text-white p-3 d-flex justify-content-between align-items-center"
+    style="background-color: #079299"
   >
-    <div
-      class="d-flex border-bottom justify-content-between align-items-center mb-3"
-    >
-      <h3 class="me-3 text-white">HDP</h3>
+    <div class="d-flex align-items-center">
+      <h2 class="m-0 fw-bold">HDP</h2>
       <fa-icon
         [icon]="faHeadphones"
-        size="lg"
-        class="text-white fs-5 mb-1"
+        class="ms-3 text-white fs-2 pointer"
       ></fa-icon>
     </div>
 
-    <div>Sistema de Gerenciamento de Chamados V 1.0</div>
-
-    <!-- Botão menu hambúrguer (visível apenas em telas pequenas) -->
     <button
       class="btn btn-outline-light d-lg-none"
       type="button"
@@ -24,108 +20,65 @@
       data-bs-target="#mobileSidebar"
       aria-controls="mobileSidebar"
     >
-      <fa-icon [icon]="fabars"></fa-icon>
+      <i class="bi bi-list"></i>
     </button>
+    <div>
+     <div class="border border-info rounded-circle d-flex align-items-center justify-content-center" style="width:50px; height:50px;">
+<img src="/src/app/img/user.png" alt="Foto Perfil" style="width: 50px; height: 50px;">
+</div>
+    </div>
   </header>
 
-  <div class="d-flex flex-grow-1" style="overflow: hidden">
-    <!-- Sidebar fixa (visível apenas em telas grandes) -->
-
-    <div
-      class="bg-light p-3 d-none d-lg-block"
-      style="width: 280px; border-right: 2px solid #0abdc7"
-      *ngIf="showSidebar"
-    >
-      <div
-        class="border-bottom border-2 mb-4 justify-content-between align-items-center"        
-      >
-        <div class="d-flex justify-content-between">
-          <div
-            class="d-flex userFoto align-items-center justify-content-center"
-          >
-          <img src="https://sujeitoprogramador.com/steve.png" alt="">
-            <!-- <fa-icon
-              [icon]="faUserTie"
-              class="text-primary fs-3 mb-1"
-            ></fa-icon> -->
-          </div>
-          <div
-            class="d-flex userFoto align-items-center justify-content-center"
-          >
-            <fa-icon
-              [icon]="fabars"
-              class="corBorda fs-3 mb-1"  
-              (click)="toggleSidebar()"            
-            ></fa-icon>
-          </div>
-        </div>
-      </div>
+  <!-- Main Layout -->
+  <div class="d-flex flex-grow-1 overflow-hidden">
+    <!-- Sidebar (desktop) -->
+    <!-- <nav class="bg-light p-3 d-none d-lg-block" style="width: 200px; border-right: 1px solid #ccc;">
       <ul class="nav flex-column">
-        <li class="nav-item">
-          <a
-            class="nav-link corLinks text-decoration-none"
-            routerLink="/"
-            routerLinkActive="active"
-            >DashBoard</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link corLinks text-decoration-none"
-            routerLink="/"
-            routerLinkActive="active"
-            >Abrir Chamado</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link corLinks text-decoration-none"
-            routerLink="/categoria"
-            routerLinkActive="active"
-            >Categorias</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link corLinks text-decoration-none"
-            routerLink="/manterCategoria"
-            routerLinkActive="active"
-            >Departamentos</a
-          >
-        </li>
+        <li class="nav-item"><a class="nav-link" routerLink="/departamento" routerLinkActive="active">Departamento</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/categoria" routerLinkActive="active">Categorias</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/cargo" routerLinkActive="active">Cargo</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/listar-chamado" routerLinkActive="active">Listar Chamado</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/manter-chamado" routerLinkActive="active">Abrir Chamado</a></li>
       </ul>
-    </div>
+    </nav> -->
 
-    <!-- Conteúdo principal -->
-    <div class="flex-grow-1 d-flex flex-column" style="overflow: auto">
-      <div class="flex-grow-1 p-3">
-        <router-outlet></router-outlet>
-      </div>
-    </div>
+    <app-app-menu></app-app-menu>
+
+    <!-- Main Content -->
+    <main class="flex-grow-1 overflow-auto p-3">
+      <router-outlet></router-outlet>
+    </main>
   </div>
 </div>
 
-<!-- Sidebar Offcanvas (mobile) -->
+<!-- Offcanvas Sidebar (mobile) -->
 <div
   class="offcanvas offcanvas-start d-lg-none"
   tabindex="-1"
   id="mobileSidebar"
-  aria-labelledby="mobileSidebarLabel"
 >
   <div class="offcanvas-header">
-    <h5 id="mobileSidebarLabel">Menu</h5>
+    <h5 class="offcanvas-title">Menu</h5>
     <button
       type="button"
       class="btn-close"
       data-bs-dismiss="offcanvas"
-      aria-label="Fechar"
     ></button>
   </div>
   <div class="offcanvas-body">
     <ul class="nav flex-column">
       <li class="nav-item">
         <a
-          class="nav-link corLinks text-decoration-none"
+          class="nav-link"
+          routerLink="/departamento"
+          routerLinkActive="active"
+          data-bs-dismiss="offcanvas"
+          >Departamentos</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
           routerLink="/categoria"
           routerLinkActive="active"
           data-bs-dismiss="offcanvas"
@@ -134,13 +87,15 @@
       </li>
       <li class="nav-item">
         <a
-          class="nav-link corLinks text-decoration-none"
-          routerLink="/manterCategoria"
+          class="nav-link"
+          routerLink="/cargo"
           routerLinkActive="active"
           data-bs-dismiss="offcanvas"
-          >Manter</a
+          >Cargos</a
         >
       </li>
     </ul>
   </div>
 </div>
+
+<!-- https://ajuda.vivaintra.com/support/solutions/articles/33000276876-como-abrir-um-chamado-no-m%C3%B3dulo-help-desk -->

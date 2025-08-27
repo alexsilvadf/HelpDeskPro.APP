@@ -1,0 +1,10 @@
+::ng-deep .p-button .pi.pi-upload .pi-check {
+  font-size: 10px; /* ou 12px, 10px, etc. */
+}
+
+::ng-deep .p-fileupload-basic .p-button {
+  background-color: #858310ff; /* azul */
+  color: white;
+  border: none;
+}
+
