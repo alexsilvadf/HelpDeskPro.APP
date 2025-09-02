@@ -156,7 +156,7 @@ export class AtenderChamadoComponent implements OnInit{
  
    editarChamado(event: any) {
          this.mostrarModal = true;
-         this.tituloModal = 'Atender Chamado'
+         this.tituloModal = 'Atender Chamadoxxxxx'
          let tela = 'Atendimento';
  
           setTimeout(() => {

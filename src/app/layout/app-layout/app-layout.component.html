@@ -1,5 +1,6 @@
 <!-- layout.component.html -->
-<div class="d-flex flex-column vh-100" style="height: 100vh">
+<div class="d-flex flex-column vh-100">
+
   <!-- Header -->
   <header
     class="text-white p-3 d-flex justify-content-between align-items-center"
@@ -7,42 +8,41 @@
   >
     <div class="d-flex align-items-center">
       <h2 class="m-0 fw-bold">HDP</h2>
-      <fa-icon
-        [icon]="faHeadphones"
-        class="ms-3 text-white fs-2 pointer"
-      ></fa-icon>
+      <fa-icon [icon]="faHeadphones" class="ms-3 text-white fs-2 pointer d-none d-lg-inline"></fa-icon>
     </div>
 
+    <!-- Botão mobile para sidebar -->
     <button
-      class="btn btn-outline-light d-lg-none"
+      class="btn btn-outline-light d-md-none"
       type="button"
       data-bs-toggle="offcanvas"
       data-bs-target="#mobileSidebar"
       aria-controls="mobileSidebar"
     >
-      <i class="bi bi-list"></i>
+     
+           <fa-icon [icon]="fabars" class="text-white pointer"></fa-icon>
     </button>
-    <div>
-     <div class="border border-info rounded-circle d-flex align-items-center justify-content-center" style="width:50px; height:50px;">
-<img src="/src/app/img/user.png" alt="Foto Perfil" style="width: 50px; height: 50px;">
-</div>
+
+    <!-- Perfil do usuário -->
+    <div class="d-none d-md-block">
+      <div
+        class="border border-info rounded-circle d-flex align-items-center justify-content-center"
+        style="width: 50px; height: 50px"
+      >
+        <img
+          src="/src/app/img/user.png"
+          alt="Foto Perfil"
+          class="rounded-circle w-100 h-100"
+        />
+      </div>
     </div>
   </header>
 
   <!-- Main Layout -->
   <div class="d-flex flex-grow-1 overflow-hidden">
-    <!-- Sidebar (desktop) -->
-    <!-- <nav class="bg-light p-3 d-none d-lg-block" style="width: 200px; border-right: 1px solid #ccc;">
-      <ul class="nav flex-column">
-        <li class="nav-item"><a class="nav-link" routerLink="/departamento" routerLinkActive="active">Departamento</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/categoria" routerLinkActive="active">Categorias</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/cargo" routerLinkActive="active">Cargo</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/listar-chamado" routerLinkActive="active">Listar Chamado</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/manter-chamado" routerLinkActive="active">Abrir Chamado</a></li>
-      </ul>
-    </nav> -->
 
-    <app-app-menu></app-app-menu>
+    <!-- Sidebar (desktop) -->
+    <app-app-menu class="d-none d-lg-block flex-shrink-0" style="width: 220px;"></app-app-menu>
 
     <!-- Main Content -->
     <main class="flex-grow-1 overflow-auto p-3">
@@ -52,50 +52,28 @@
 </div>
 
 <!-- Offcanvas Sidebar (mobile) -->
-<div
-  class="offcanvas offcanvas-start d-lg-none"
-  tabindex="-1"
-  id="mobileSidebar"
->
+<div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="mobileSidebar">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title">Menu</h5>
-    <button
-      type="button"
-      class="btn-close"
-      data-bs-dismiss="offcanvas"
-    ></button>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/departamento"
-          routerLinkActive="active"
-          data-bs-dismiss="offcanvas"
-          >Departamentos</a
-        >
+        <a class="nav-link" routerLink="/departamento" routerLinkActive="active" data-bs-dismiss="offcanvas">Departamentos</a>
       </li>
       <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/categoria"
-          routerLinkActive="active"
-          data-bs-dismiss="offcanvas"
-          >Categorias</a
-        >
+        <a class="nav-link" routerLink="/categoria" routerLinkActive="active" data-bs-dismiss="offcanvas">Categorias</a>
       </li>
       <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/cargo"
-          routerLinkActive="active"
-          data-bs-dismiss="offcanvas"
-          >Cargos</a
-        >
+        <a class="nav-link" routerLink="/cargo" routerLinkActive="active" data-bs-dismiss="offcanvas">Cargos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/listar-chamado" routerLinkActive="active" data-bs-dismiss="offcanvas">Listar Chamado</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/manter-chamado" routerLinkActive="active" data-bs-dismiss="offcanvas">Abrir Chamado</a>
       </li>
     </ul>
   </div>
 </div>
-
-<!-- https://ajuda.vivaintra.com/support/solutions/articles/33000276876-como-abrir-um-chamado-no-m%C3%B3dulo-help-desk -->

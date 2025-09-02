@@ -60,3 +60,18 @@ img{
 .corPadrao{
     color: #00adb5;
 }
+
+/* Links do menu mobile (offcanvas) */
+.offcanvas .nav-link {
+  transition: all 0.3s ease; /* animação suave */
+  color: #333; /* cor padrão */
+}
+
+.offcanvas .nav-link:hover {
+  background-color: #079299; /* fundo ao passar o mouse */
+  color: #fff; /* texto branco */
+  border-radius: 5px; /* cantos arredondados */
+  padding-left: 12px; /* leve deslocamento */
+  text-decoration: none; /* remove underline */
+}
+

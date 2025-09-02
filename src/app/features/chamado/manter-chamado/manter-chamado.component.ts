@@ -21,7 +21,10 @@ export class ManterChamadoComponent implements OnInit {
   edicao: boolean = false;
   tipoTela: string = '';
 
+  perfilLogado: string = "";
+
   arquivo: File | null = null;
+  selectedFiles: File[] = [];
 
   status = [
     { codigo: 0, nome: 'Baixa' },
@@ -69,6 +72,12 @@ export class ManterChamadoComponent implements OnInit {
     //Pegar o departamento do usuário logado
     // this.form.controls['departamento'].setValue('Secretaria de Obras');
     const departamento = localStorage.getItem('departamento');
+   this.perfilLogado = localStorage.getItem('perfil') || '';
+
+   if(this.perfilLogado !== 'user' && this.perfilLogado !== 'Administrador'){
+    this.form.controls['descricaoProblema'].disable();
+   }
+
 
     if (departamento) {
       this.form.controls['departamento'].setValue(departamento);
@@ -97,7 +106,7 @@ export class ManterChamadoComponent implements OnInit {
       this.form.controls['categoria'].setValue(categoriaEncontrada);
      
     } else {
-      this.tituloPagina = 'Atender Chamado';
+      this.tituloPagina = 'Atender Chamadoyyyyyy';
       this.tipoTela = 'Atendimento';
       this.edicao = true;
 
@@ -299,4 +308,10 @@ export class ManterChamadoComponent implements OnInit {
     this.categorias.push(event);
     this.form.controls['idCategoria'].setValue(event.codigo);
   }
+
+  // No seu componente
+
+
+
+
 }

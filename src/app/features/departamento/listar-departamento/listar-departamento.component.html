@@ -5,17 +5,18 @@
   <div class="p-card-header">
     <div class="p-card-header-container">
       <i class="pi pi-building-columns"></i>
-      <h3>Listagem de Departamentos</h3>
+    <h3 class="fs-5 fs-md-4 fs-lg-3">Listagem de Departamentos</h3>
+
     </div>
   </div>
 
   <p-panel>
-    <form [formGroup]="form">
-      <div class="form-group d-flex col-12">
-        <div class="me-3">
-          <div class="mb-1">
-            <label for="categoria">Departamento</label>
-          </div>
+  <form [formGroup]="form">
+    <div class="row g-3">
+      <!-- Campo Departamento -->
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="departamento">Departamento</label>
           <p-autoComplete
             class="w-100"
             formControlName="departamento"
@@ -29,22 +30,26 @@
           >
           </p-autoComplete>
         </div>
+      </div>
 
-        <div>
-          <div class="mb-1">
-            <label for="situacao">Situação</label>
-          </div>
+      <!-- Campo Situação -->
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <label for="situacao">Situação</label>
           <p-dropdown
             class="w-100"
             [options]="status"
             optionLabel="nome"
             placeholder="Selecione o Status"
             (onChange)="buscarDepartamentoPorStatus($event)"
-          />
+          >
+          </p-dropdown>
         </div>
       </div>
-    </form>
-  </p-panel>
+    </div>
+  </form>
+</p-panel>
+
 
   <div class="d-flex col-12 justify-content-end m-3 ms-0">
     <fa-icon
