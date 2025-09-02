@@ -3,36 +3,31 @@
 
 <p-card class="card">
   <div class="p-card-header">
-    <div class="p-card-header-container">
-      <i class="pi pi-cog"></i>
-      <h3>{{tituloPagina}}</h3>
+    <div class="p-card-header-container d-flex align-items-center">
+      <i class="pi pi-cog me-2"></i>
+      <h3 class="fs-5 fs-md-4 fs-lg-3">{{ tituloPagina }}</h3>
     </div>
   </div>
 
   <p-panel>
     <form [formGroup]="form" class="p-3">
-      <!-- Linha: Título + Prioridade -->
+      <!-- Status do chamado -->
+      <div class="mb-3 d-flex flex-column">
+        <label for="statusChamado" class="form-label">Status do chamado</label>
+        <p-dropdown
+          class="w-100"
+          [options]="situacaoChamado"
+          optionLabel="nome"
+          optionValue="codigo"
+          placeholder="Selecione o Status"
+          formControlName="statusChamado"
+        ></p-dropdown>
+      </div>
 
- <div class="d-flex flex-column col-12 mb-5">
-          <div class="mb-1">
-            <label for="categoria">Status do chamado</label>
-          </div>
-          <div>         
-           <p-dropdown
-            class="w-100"
-            [options]="situacaoChamado"
-            optionLabel="nome"
-            optionValue="codigo"
-            placeholder="Selecione o Status"         
-            formControlName="statusChamado" 
-          />
-        </div>
-        </div>
-
-
-      <div class="d-flex col-12 justify-content-center">
-        <div class="col-6">
-          <label for="departamento">Departamento</label>
+      <!-- Departamento + Categoria -->
+      <div class="row g-3 mb-3">
+        <div class="col-12 col-md-6">
+          <label for="departamento" class="form-label">Departamento</label>
           <input
             type="text"
             class="form-control"
@@ -41,12 +36,10 @@
           />
         </div>
 
-        <div class="ms-3 mt-3 col-6 p-0">
-          <!-- <div class="mb-1">
-            <label for="categoria">Categoria</label>
-          </div> -->
+        <div class="col-12 col-md-6 d-flex flex-column">
+          <label for="categoria" class="form-label">Categoria</label>
           <p-autoComplete
-            class="w-100"       
+            class="w-100 auto-complete-small"
             [dropdown]="true"
             [disabled]="tipoTela === 'Atendimento'"
             formControlName="categoria"
@@ -55,119 +48,120 @@
             (onSelect)="categoriaSelecionada($event)"
             placeholder="Selecione uma categoria"
             field="nome"
-          >
-          </p-autoComplete>
+          ></p-autoComplete>
         </div>
       </div>
 
-      <div class="form-group d-flex col-12">
-        <!-- Título -->
-        <div class="mt-2 col-9">
-          <label for="titulo">Título</label>
+      <!-- Título + Prioridade -->
+      <div class="row g-3 mb-3">
+        <div class="col-12 col-md-9">
+          <label for="titulo" class="form-label">Título</label>
           <input
             id="titulo"
             type="text"
             pInputText
             formControlName="titulo"
-            class="col-12"            
+            class="form-control"
           />
         </div>
 
-        <!-- Prioridade -->
-        <div class="mt-2 ms-3 col-3">
-          <label for="status">Prioridade</label>
-          <div>
-            <p-dropdown
-              class="w-100"
-              formControlName="prioridade"
-              [options]="status"
-              optionLabel="nome"
-              optionValue="codigo"
-              placeholder="Selecione"
-                [disabled]="tipoTela === 'Atendimento'"
-            ></p-dropdown>
-          </div>
+        <div class="col-12 col-md-3 d-flex flex-column">
+          <label for="prioridade" class="form-label">Prioridade</label>
+          <p-dropdown
+            class="w-100"
+            formControlName="prioridade"
+            [options]="status"
+            optionLabel="nome"
+            optionValue="codigo"
+            placeholder="Selecione"
+            [disabled]="tipoTela === 'Atendimento'"
+          ></p-dropdown>
         </div>
       </div>
 
       <!-- Descrição -->
-      <div class="col-12 mt-3">
-        <label for="descricaoProblema">Descreva o problema</label>
-        <div class="card flex justify-content-center">
-          <textarea
-            id="descricaoProblema"
-            rows="5"
-            cols="30"
-            pInputTextarea
-            class="w-100"
-            formControlName="descricaoProblema"
-          ></textarea>
-        </div>
+      <div class="mb-3">
+        <label for="descricaoProblema" class="form-label"
+          >Descreva o problema</label
+        >
+        <textarea
+          id="descricaoProblema"
+          rows="5"
+          pInputTextarea
+          class="form-control w-100"
+          formControlName="descricaoProblema"
+        ></textarea>
       </div>
 
-      <div class="col-12 mt-3">
-        <label for="descricaoProblema">Resolução do problema</label>
-        <div class="card flex justify-content-center">
-          <textarea
-            id="resolucaoProblema"
-            rows="5"
-            cols="30"
-            pInputTextarea
-            class="w-100"
-            formControlName="resolucaoProblema"
-          ></textarea>
-        </div>
+      <div class="mb-3" *ngIf="perfilLogado === 'Administrador' || perfilLogado === 'suport'"
+>
+        <label for="resolucaoProblema" class="form-label"
+          >Resolução do problema</label
+        >
+        <textarea
+          id="resolucaoProblema"
+          rows="5"
+          pInputTextarea
+          class="form-control w-100"
+          formControlName="resolucaoProblema"
+        ></textarea>
       </div>
 
-      <!-- Upload + Botão -->
-      <div class="col-12 mt-3">
-        <div class="d-flex justify-content-between align-items-end">
-          <!-- Upload de Arquivo -->
-          <div *ngIf="!edicao">
-            <p-fileUpload
-              mode="basic"
-              chooseLabel="Anexar Arquivo"
-              chooseIcon="pi pi-upload"
-              name="anexo"
-              [customUpload]="true"
-              accept="image/*"
-              [maxFileSize]="1000000"
-              (onUpload)="onUpload($event)"
-              (onSelect)="onSelect($event)"
-              (onProgress)="onProgress($event)"
-            ></p-fileUpload>
+      <!-- Upload + Botões -->
+     <!-- Upload + Botões -->
+<div class="d-flex flex-wrap justify-content-between align-items-end gap-3">
+  
+  <!-- Upload de Arquivo -->
+  <div *ngIf="!edicao" class="file-upload-clean flex-grow-1">
+    <p-fileUpload
+      name="anexo"
+      [customUpload]="true"
+      [auto]="true"
+      [showUploadButton]="false"
+      [showCancelButton]="false"
+      [accept]="'.jpg,.png,.jpeg,.pdf'"
+      [maxFileSize]="1000000"
+      chooseLabel="Selecionar Arquivo"
+      chooseIcon="pi pi-upload"
+      mode="advanced"
+      class="w-100"
+      (onSelect)="onSelect($event)"
+      (onUpload)="onUpload($event)"
+    ></p-fileUpload>
 
-            <p *ngIf="uploadProgress >= 0">Progresso: {{ uploadProgress }}%</p>
-            <p *ngIf="uploadMessage">{{ uploadMessage }}</p>
-          </div>
+    <ul *ngIf="selectedFiles?.length" class="file-list mt-2">
+      <li *ngFor="let file of selectedFiles">{{ file.name }}</li>
+    </ul>
 
-          <!-- Botão Salvar -->
-          <div *ngIf="!edicao">
-            <button
-              type="button"
-              pButton
-              label="Salvar"
-              class="p-button-primary"
-              icon="pi pi-check"
-              iconPos="right"
-              (click)="handleAdd($event)"
-            ></button>
-          </div>
+    <p *ngIf="uploadMessage" class="mt-1 text-success">{{ uploadMessage }}</p>
+  </div>
 
-          <div *ngIf="edicao">
-            <button
-              type="button"
-              pButton
-              label="Atualizar Chamado"
-              class="p-button-primary"
-              icon="pi pi-check"
-              iconPos="right"
-              (click)="handleUpdate($event)"
-            ></button>
-          </div>
+  <!-- Botões -->
+  <div class="d-flex gap-2 flex-shrink-0 mt-2 mt-md-0">
+    <button
+      *ngIf="!edicao"
+      type="button"
+      pButton
+      label="Salvar"
+      class="p-button-primary"
+      icon="pi pi-check"
+      iconPos="right"
+      (click)="handleAdd($event)"
+    ></button>
 
-        </div>
-      </div>
+    <button
+      *ngIf="edicao"
+      type="button"
+      pButton
+      label="Atualizar Chamado"
+      class="p-button-primary"
+      icon="pi pi-check"
+      iconPos="right"
+      (click)="handleUpdate($event)"
+    ></button>
+  </div>
+</div>
+
     </form>
   </p-panel>
 </p-card>
