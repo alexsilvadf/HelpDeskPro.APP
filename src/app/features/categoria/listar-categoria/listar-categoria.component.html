@@ -10,42 +10,48 @@
     </div>
   </div>
 
-  <p-panel>
-    <form [formGroup]="form">
-      <div class="form-group d-flex col-12">
-        <div class="me-3">
-          <div class="mb-1">
-            <label for="categoria">Categoria</label>
-          </div>
-          <p-autoComplete
-            class="w-100"
-            formControlName="categoria"
-            [dropdown]="true"
-            [suggestions]="categoriasFiltradas"
-            (completeMethod)="filtrarCategorias($event)"
-            (onSelect)="categoriaSelecionada($event)"
-            (onClear)="limparFiltros()"
-            placeholder="Selecione uma categoria"
-            field="nome"
-          >
-          </p-autoComplete>
+<p-panel>
+  <form [formGroup]="form">
+    <div class="row g-3"> <!-- row responsiva com espaçamento -->
+      
+      <!-- Categoria -->
+      <div class="col-12 col-md-6"> <!-- ocupa 50% em md+ e 100% em mobile -->
+        <div class="mb-2">
+          <label for="categoria" class="form-label">Categoria</label>
         </div>
-
-        <div>
-          <div class="mb-1">
-            <label for="categoria">Situação</label>
-          </div>
-          <p-dropdown
-            class="w-100"
-            [options]="status"
-            optionLabel="nome"
-            placeholder="Selecione o Status"
-            (onChange)="buscarCategoriaPorStatus($event)"
-          />
-        </div>
+        <p-autoComplete
+          class="w-100"
+          formControlName="categoria"
+          [dropdown]="true"
+          [suggestions]="categoriasFiltradas"
+          (completeMethod)="filtrarCategorias($event)"
+          (onSelect)="categoriaSelecionada($event)"
+          (onClear)="limparFiltros()"
+          placeholder="Selecione uma categoria"
+          field="nome"
+        >
+        </p-autoComplete>
       </div>
-    </form>
-  </p-panel>
+
+      <!-- Situação -->
+      <div class="col-12 col-md-6"> <!-- ocupa 50% em md+ e 100% em mobile -->
+        <div class="mb-2">
+          <label for="situacao" class="form-label">Situação</label>
+        </div>
+        <p-dropdown
+          class="w-100"
+          [options]="status"
+          optionLabel="nome"
+          placeholder="Selecione o Status"
+          (onChange)="buscarCategoriaPorStatus($event)"
+        >
+        </p-dropdown>
+      </div>
+
+    </div>
+  </form>
+</p-panel>
+
 
   <div class="d-flex col-12 justify-content-end m-3 ms-0">
     <fa-icon

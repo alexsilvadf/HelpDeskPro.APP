@@ -1,25 +1,18 @@
-/* .nav-link.active {
+/* Efeito hover nos links do menu */
+nav .nav-link {
+  transition: all 0.3s ease; /* animação suave */
+  color: #333; /* cor padrão */
+}
+
+nav .nav-link:hover {
+  background-color: #13b6beff; /* cor de fundo ao passar o mouse */
+  color: #fff; /* cor do texto ao passar o mouse */
+  border-radius: 5px; /* cantos arredondados */
+  padding-left: 12px; /* leve deslocamento ao passar o mouse */
+  text-decoration: none; /* remove underline */
   font-weight: bold;
-  text-decoration: underline;
 }
 
-.corBorda{
-    color: #00adb5;
-}
-
-a{
-  text-decoration: none;
-}
-
-.corLinks{
-  color:  #2bcfd8ff;
-  transition: color 0.2s;
-  font-size: 20px;
-}
-
-.corLinks:hover {
-  color: #00adb5; 
-} */
 
 html, body {
   height: 100%;

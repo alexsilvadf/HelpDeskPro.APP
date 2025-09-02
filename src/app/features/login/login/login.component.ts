@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { LoadingService } from 'src/app/core/loading/loading.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -13,6 +14,8 @@ export class LoginComponent implements OnInit {
   //  email = '';
   password = '';
   erro = '';
+  isLoading: boolean = false;
+
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -23,7 +26,8 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private fb: FormBuilder,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {}
@@ -37,6 +41,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+  this.loadingService.mostrar();
     this.auth
       .login(
         this.loginForm.controls.email.value as any,
@@ -44,7 +49,7 @@ export class LoginComponent implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          // this.auth.setToken(res.resposta);
+ this.loadingService.esconder(); // termina o loading
           this.auth.salvarLogin(
             res.resposta.token,
             res.resposta.perfil,
@@ -59,6 +64,7 @@ export class LoginComponent implements OnInit {
           }
         },
         error: () => {
+             this.loadingService.esconder(); // termina o loading
           this.messageService.add({
             severity: 'warn',
             summary: 'Aviso',
